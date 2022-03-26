@@ -1,0 +1,57 @@
+.trend-video-grid-layout {
+        display: grid;
+        /* grid-template-columns: 1fr 1fr 1fr; */
+        min-height: 100vh;
+        grid-template-areas:
+          "header header header"
+          "aside main main";
+      }
+
+.trend-main {
+    grid-area: main;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.video-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.card-vrt {
+    width: 20rem;
+}
+
+.card-desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-img {
+    padding: 0;
+    object-fit: contain;
+}
+
+.card-img-container {
+    height: auto;
+}
+
+.flex-1 {
+    flex:1
+}
+
+.m-l-1 {
+    margin-left: 1rem;
+}
+
+.trend-title {
+    margin: 1rem 4rem;
+
+}
+
+.card:hover, .card{
+    border: 0.5px solid var(--COLOR-SECONDARY);
+}
