@@ -1,0 +1,19 @@
+.aside {
+    grid-area: aside;
+    margin: 4rem 1rem;
+}
+
+.aside > h2,
+.aside > h2 > span {
+font-weight: 400;
+display:flex;
+align-items: center;
+}
+
+.aside>h2 {
+    margin: 1rem;
+}
+
+.aside-icons {
+    margin-right: 0.5rem;
+}
