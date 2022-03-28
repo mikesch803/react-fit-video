@@ -1,11 +1,15 @@
 import React, { useState, useContext } from "react";
+import { useEffect } from "react";
 import { Aside, VideoCard } from "../../components";
 import { VideoContext } from "../../context";
 import "./Home.css";
 export function Home() {
   const { state } = useContext(VideoContext);
+  const [categoryVideos, setCateogoryVideos] = useState([]);
 
-  const [categoryVideos, setCateogoryVideos] = useState([...state.allVideos]);
+  useEffect(() => {
+    setCateogoryVideos(state.allVideos);
+  }, [state]);
 
   const categoryHandler = (item) => {
     let sortVideos = [...state.allVideos];
