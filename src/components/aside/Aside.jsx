@@ -1,45 +1,23 @@
 import React from "react";
-import {
-  HistoryIcon,
-  HomeIcon,
-  LikedIcon,
-  TrendIcon,
-  WatchLaterIcon,
-} from "../../icons/Icons";
+import { NavLink } from "react-router-dom";
+import { asideData } from "../../data/aside.data";
 import "./Aside.css";
-export default function Aside() {
+export function Aside() {
+ 
   return (
     <aside className="aside">
-      <h2>
-        <span className="aside-icons" >
-          <HomeIcon />
-        </span>
-        Home
-      </h2>
-      <h2>
-        <span className="aside-icons">
-          <TrendIcon />
-        </span>
-        Trend
-      </h2>
-      <h2>
-        <span className="aside-icons">
-          <HistoryIcon />
-        </span>
-        History
-      </h2>
-      <h2>
-        <span className="aside-icons">
-          <WatchLaterIcon />
-        </span>
-        Watch later
-      </h2>
-      <h2>
-        <span className="aside-icons">
-          <LikedIcon />
-        </span>
-        Liked videos
-      </h2>
+      <div className="sidebar">
+        {asideData.map((link,index) => 
+          (
+            <NavLink to={link.to} className="btn-link" key={index}>
+              <span className="aside-icons">
+                {link.icon}
+              </span>
+              {link.text}
+            </NavLink>
+          )
+        )}
+      </div>
     </aside>
   );
 }

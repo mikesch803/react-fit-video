@@ -1,0 +1,16 @@
+.home-grid-layout {
+    display: grid;
+    grid-template-areas: "header header header"
+    "aside main main";
+}
+
+.home-main {
+    grid-area: main;
+    margin: auto;
+    max-width: 80%;
+}
+
+.btn-round {
+    border-radius: 1.5rem;
+    margin: 1rem;
+}
