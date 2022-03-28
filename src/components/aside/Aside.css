@@ -1,19 +1,29 @@
 .aside {
     grid-area: aside;
-    margin: 4rem 1rem;
+    margin: 0rem 1rem;
 }
 
-.aside > h2,
-.aside > h2 > span {
+.sidebar {
+    position: sticky;
+    top: 0;
+}
+
+.sidebar > a,
+.sidebar > a > span {
 font-weight: 400;
 display:flex;
 align-items: center;
 }
 
-.aside>h2 {
+.sidebar>a {
     margin: 1rem;
+    font-size: 1.5rem;
 }
 
 .aside-icons {
-    margin-right: 0.5rem;
+    margin-right: 1rem;
+}
+
+a {
+    text-decoration: none;
 }
