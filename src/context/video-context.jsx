@@ -9,7 +9,6 @@ const VideoProvider = ({ children }) => {
     (async () => {
       try {
         const response = await axios.get("/api/videos");
-        console.log(response.data);
         if (response.status === 200) {
           dispatch({ type: "SET_ALL_VIDEOS", payload: response.data.videos });
         }
@@ -28,7 +27,6 @@ const VideoProvider = ({ children }) => {
             type: "SET_VIDEOS_BY_CATEGORY",
             payload: response.data.categories,
           });
-          console.log(response.data.categories);
         }
       } catch (err) {
         console.log(err);

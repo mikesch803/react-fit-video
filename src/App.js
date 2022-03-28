@@ -1,19 +1,39 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components";
-import { History, Home,LikedVideos,Playlist,VideoListing, WatchLater } from "./pages";
+import Mockman from "mockman-js";
+import {
+  Auth,
+  History,
+  Home,
+  LikedVideos,
+  Login,
+  NotAuth,
+  Playlist,
+  Signup,
+  VideoListing,
+  WatchLater,
+} from "./pages";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <Routes>
-        <Route path="/trend" element={<VideoListing/>}/>
-        <Route path="/" element={<Home/>}/>
-        {/* <Route path="/history" element={<History/>}/>
-        <Route path="/watchlater" element={<WatchLater/>}/>
-        <Route path="/playlist" element={<Playlist/>}/>
-        <Route path="/likedvideos" element={<LikedVideos/>}/> */}
+        <Route path="/trend" element={<VideoListing />} />
+        <Route path="/" element={<Home />} />
+        <Route element={<NotAuth />}>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+
+        <Route element={<Auth />}>
+          <Route path="/history" element={<History />} />
+          <Route path="/watchlater" element={<WatchLater />} />
+          <Route path="/playlist" element={<Playlist />} />
+          <Route path="/likedvideos" element={<LikedVideos />} />
+        </Route>
+        <Route path="/mock" element={<Mockman />} />
       </Routes>
     </div>
   );
