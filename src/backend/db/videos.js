@@ -18,7 +18,7 @@ export const videos = [
     alt: "a girl running",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLTNzCrRfk1Q8NYK6sZLe-yRImRVbbfC51HqrMYUBA=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=qB5G6NOh-ww",
+    src: "qB5G6NOh-ww",
   },
   {
     _id: uuid(),
@@ -32,7 +32,7 @@ export const videos = [
     alt: "a man",
     avatar:
       "https://yt3.ggpht.com/4syhBAa6d4sK_J8YxhRFHDyARee3qoR2bUtGMtRDyyVncFn41bSHUDf-FNmvcu3TD2JwowD8sA=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=aL0Nnj784DE",
+    src: "aL0Nnj784DE",
   },
   {
     _id: uuid(),
@@ -46,7 +46,7 @@ export const videos = [
     alt: "a man and a woman",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLRrIRZNmwaFU4mCc0RkBxLasR2WRYdmwrtN0eJGx7U=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=ml6cT4AZdqI&t=709s",
+    src: "ml6cT4AZdqI",
   },
   {
     _id: uuid(),
@@ -59,7 +59,7 @@ export const videos = [
     alt: "a man",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLSEV5H0Dc_SHuQwWmvhnSJG4guCrWjvhTe8wlzLKA=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=JlMtsyXkxQE",
+    src: "JlMtsyXkxQE",
   },
   {
     _id: uuid(),
@@ -73,7 +73,7 @@ export const videos = [
     alt: "a man",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLQP1jFRdLAFi6h7WIaIQE9_GuIPjbARXypk-b92=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=EVybAHUcXdI",
+    src: "EVybAHUcXdI",
   },
   {
     _id: uuid(),
@@ -86,7 +86,7 @@ export const videos = [
     alt: "gaurav taneja",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLRujdeBsD9rkMJRVTT6FZfoY-BMkv6UhPROubBA=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=yA3d231yU_U",
+    src: "yA3d231yU_U",
   },
   {
     _id: uuid(),
@@ -100,7 +100,7 @@ export const videos = [
     alt: "a woman",
     avatar:
       "https://yt3.ggpht.com/qIZlFAxnyGZ6NI0Vlk7l1hiYU6OcrmthrU0y9xvh6goHl5EO4sdsPxUzhBvuXuSonxqYYdqVKTU=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=IT94xC35u6k",
+    src: "IT94xC35u6k",
   },
   {
     _id: uuid(),
@@ -113,7 +113,7 @@ export const videos = [
     alt: "text",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLRjVz4DYWQL09wAj7X3wdRSuHNKh52ZY4KJrlzjJA=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=Q89St6BTxIQ",
+    src: "Q89St6BTxIQ",
   },
   {
     _id: uuid(),
@@ -127,7 +127,7 @@ export const videos = [
     alt: "a man",
     avatar:
       "https://yt3.ggpht.com/NHeF9acFx7JjdGBZJa1ZcWo0IVbkGPPYA-D2VVHTHMppbm8QkVuzKSzpPRP2LEXywK1XS1zWOg=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=kf0Af6A5wW8",
+    src: "kf0Af6A5wW8",
   },
   {
     _id: uuid(),
@@ -141,7 +141,7 @@ export const videos = [
     alt: "a bald man",
     avatar:
       "https://yt3.ggpht.com/uT7jwY9hdQE5usLEqnp7iiFHD6hShl1nBPs1Y8m18fRCw6dLsY6HGb2cXAtwLoBLygjLL9HqXyk=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=dSSclUCeBQ4",
+    src: "dSSclUCeBQ4",
   },
   {
     _id: uuid(),
@@ -154,7 +154,7 @@ export const videos = [
     alt: "a man and a woman",
     avatar:
       "https://yt3.ggpht.com/6v6A__YZJ_8mfgFDSYrs8LKx3eq-d7GSyGhq-r2vBsWNBcZX4a57FiKr0HxYNxPKTYMozbLYTQ=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=M0uO8X3_tEA",
+    src: "M0uO8X3_tEA",
   },
   {
     _id: uuid(),
@@ -168,7 +168,7 @@ export const videos = [
     alt: "a woman",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLSF-wlgVI_KwhQT79dsxJF1yePcfJzxBdQTMkwpnw=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=Mi9m2MDK6KA",
+    src: "Mi9m2MDK6KA",
   },
   {
     _id: uuid(),
@@ -182,7 +182,7 @@ export const videos = [
     alt: "john wick",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLTA-aHEvmD7odIQGpExw0l-oTJcCpMH3tcckEGr8Q=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=U33DZyrgz2w",
+    src: "U33DZyrgz2w",
   },
   {
     _id: uuid(),
@@ -195,7 +195,7 @@ export const videos = [
     alt: "dates",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLRKOq7vUs3AmMjryCetsa69lO_PwMASQFsamW5dGnY=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=ViRfQEJvbi4",
+    src: "ViRfQEJvbi4",
   },
   {
     _id: uuid(),
@@ -209,7 +209,7 @@ export const videos = [
     alt: "vegetables",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLQMcIwTA47RHAW4Q9n6s7Vp0kMDv0qAlZYVelTJbQ=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=lyg6XfP5r0M",
+    src: "lyg6XfP5r0M",
   },
   {
     _id: uuid(),
@@ -223,6 +223,6 @@ export const videos = [
     alt: "three men",
     avatar:
       "https://yt3.ggpht.com/ytc/AKedOLQTJ27-CA5Gjecw9Stiv5oUZUEa7bzOSXOPzieizg=s88-c-k-c0x00ffffff-no-rj",
-    src: "https://www.youtube.com/watch?v=gC_L9qAHVJ8",
+    src: "gC_L9qAHVJ8",
   },
 ];

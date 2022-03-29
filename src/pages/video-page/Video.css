@@ -1,0 +1,43 @@
+.video-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "header header header header"
+    "aside main main right-aside";
+}
+
+.video-main {
+  grid-area: main;
+  /* margin: 2rem; */
+  max-width: 90%;
+}
+
+.video-aside {
+    grid-area: right-aside;
+}
+
+.video-title {
+    margin: 1rem 0;
+}
+
+.video-frame {
+  height: 28rem;
+  width: 100%;
+}
+
+.video-btns  {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.video-btns > span {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.video-btns > span > span {
+    margin-right: 5px;
+}

@@ -10,7 +10,7 @@ const VideoProvider = ({ children }) => {
       try {
         const response = await axios.get("/api/videos");
         if (response.status === 200) {
-          dispatch({ type: "SET_ALL_VIDEOS", payload: response.data.videos });
+          dispatch({ type: "ALL_VIDEOS", payload: response.data.videos });
         }
       } catch (err) {
         console.log(err);
@@ -24,7 +24,7 @@ const VideoProvider = ({ children }) => {
         const response = await axios.get("/api/categories");
         if (response.status === 200) {
           dispatch({
-            type: "SET_VIDEOS_BY_CATEGORY",
+            type: "VIDEOS_BY_CATEGORY",
             payload: response.data.categories,
           });
         }
@@ -34,13 +34,33 @@ const VideoProvider = ({ children }) => {
     })();
   }, []);
 
+  const videoClickHandler = (item) => {
+    (async () => {
+      try {
+        const response = await axios.get(`/api/video/${item._id}`);
+
+        if (response.status === 200) {
+          dispatch({
+            type: "CURRENT_VIDEO",
+            payload: response.data.video,
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  };
+
   const [state, dispatch] = useReducer(videoReducer, {
     allVideos: [],
     categoryVideos: [],
+    currentVideo: {},
   });
 
+  console.log(state.currentVideo);
+
   return (
-    <VideoContext.Provider value={{ state, dispatch }}>
+    <VideoContext.Provider value={{ state, dispatch, videoClickHandler }}>
       {children}
     </VideoContext.Provider>
   );
