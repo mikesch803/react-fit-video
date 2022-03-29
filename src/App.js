@@ -10,7 +10,7 @@ import {
   Login,
   NotAuth,
   Playlist,
-  // Signup,
+  Signup,
   Video,
   VideoListing,
   WatchLater,
@@ -25,7 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/video" element={<Video/>}/>
         <Route element={<NotAuth />}>
-          {/* <Route path="/signup" element={<Signup />} /> */}
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Route>
 
