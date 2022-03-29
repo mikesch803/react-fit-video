@@ -11,6 +11,6 @@ export  const asideData = [
     { to: "/trend", icon: <TrendIcon />, text: "trend" },
     { to: "/history", icon: <HistoryIcon />, text: "history" },
     { to: "/watchlater", icon: <WatchLaterIcon />, text: "watch later" },
-    { to: "/likdedvideos", icon: <LikedIcon />, text: "liked videos" },
+    { to: "/likedvideos", icon: <LikedIcon />, text: "liked videos" },
     { to: "/playlist", icon: <PlaylistIcon />, text: "playlist" },
   ];
