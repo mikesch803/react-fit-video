@@ -5,9 +5,10 @@ const LikeVideoContext = createContext();
 
 const LikeVideoProvider = ({ children }) => {
   const [likeVideos, setLikeVideos] = useState([]);
-  const encodedToken = localStorage.getItem("token");
 
   const addToLikedVideoHandler = (video) => {
+      
+  const encodedToken = localStorage.getItem("token");
     (async () => {
       try {
         const response = await axios.post(
@@ -31,6 +32,8 @@ const LikeVideoProvider = ({ children }) => {
   };
 
   const removeFromLikeVideoHandler = (video) => {
+      
+  const encodedToken = localStorage.getItem("token");
     (async () => {
       try {
         const response = await axios.delete(`/api/user/likes/${video._id}`, {
