@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LikeVideoContext } from "../../context";
+import { LikedVideoContext, WatchLaterContext } from "../../context";
 import {
   ThumbsDownIcon,
   ThumbsUpIcon,
@@ -8,21 +8,44 @@ import {
 import "./StackListContainer.css";
 
 export const StackListContainer = ({ item }) => {
-  const { addToLikedVideoHandler, removeFromLikeVideoHandler, likeVideos } =
-    useContext(LikeVideoContext);
+  const { addToLikedVideoHandler, removeFromLikedVideoHandler, likedVideos } =
+    useContext(LikedVideoContext);
+
+  const {
+    addVideoToWatchLaterHandler,
+    removeVideoFromWatchLaterHandler,
+    watchLaterVideos,
+  } = useContext(WatchLaterContext);
+
   return (
     <div className="stack-list-container position-stack">
       <ul>
-        <li className="btn btn-link">
-          <span className="m-r-span">
-            <WatchLaterIcon />
-          </span>
-          Add to watch later
-        </li>
-        {likeVideos.findIndex((video) => video._id === item._id) !== -1 ? (
+        {watchLaterVideos.findIndex((video) => video._id === item._id) !==
+        -1 ? (
+          <li className="btn btn-link" onClick={() => removeVideoFromWatchLaterHandler(item)}>
+            <span
+              className="m-r-span"
+            
+            >
+              <WatchLaterIcon />
+            </span>
+            Remove from watch later
+          </li>
+        ) : (
           <li
             className="btn btn-link"
-            onClick={() => removeFromLikeVideoHandler(item)}
+            onClick={() => addVideoToWatchLaterHandler(item)}
+          >
+            <span className="m-r-span">
+              <WatchLaterIcon />
+            </span>
+            Add to watch later
+          </li>
+        )}
+        {likedVideos.findIndex((video) => video._id === item._id) !== -1 ? (
+          <li
+            className="btn btn-link"
+            onClick={() => removeFromLikedVideoHandler(item)}
           >
             <span className="m-r-span">
               <ThumbsDownIcon />
