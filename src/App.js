@@ -26,7 +26,7 @@ function App() {
         <Route path={`/video/:videoId`} element={<Video/>}/>
         <Route element={<NotAuth />}>
           <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />}/>
         </Route>
 
         <Route element={<Auth />}>
