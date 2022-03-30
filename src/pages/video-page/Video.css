@@ -36,8 +36,11 @@
     align-items: center;
     margin-right: 10px;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .video-btns > span > span {
     margin-right: 5px;
+    display: flex;
+    align-items: center;
 }
