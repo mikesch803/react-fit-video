@@ -32,6 +32,11 @@ import {
   addVideoToPlaylistHandler,
   removeVideoFromPlaylistHandler,
 } from "./backend/controllers/PlaylistController";
+import {
+  addItemToWatchLaterVideos,
+  getWatchLaterVideosHandler,
+  removeItemFromWatchLaterVideos,
+} from "./backend/controllers/WatchLaterController";
 import { users } from "./backend/db/users";
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -47,6 +52,7 @@ export function makeServer({ environment = "development" } = {}) {
       like: Model,
       history: Model,
       playlist: Model,
+      watchlater: Model
     },
 
     // Runs on the start of the server
@@ -60,8 +66,10 @@ export function makeServer({ environment = "development" } = {}) {
         server.create("user", {
           ...item,
           likes: [],
+          watchlater:[],
           history: [],
           playlists: [],
+
         })
       );
     },
@@ -86,7 +94,13 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/user/likes", getLikedVideosHandler.bind(this));
       this.post("/user/likes", addItemToLikedVideos.bind(this));
       this.delete("/user/likes/:videoId", removeItemFromLikedVideos.bind(this));
-
+ // watch later routes (private)
+ this.get("/user/watchlater", getWatchLaterVideosHandler.bind(this));
+ this.post("/user/watchlater", addItemToWatchLaterVideos.bind(this));
+ this.delete(
+   "/user/watchlater/:videoId",
+   removeItemFromWatchLaterVideos.bind(this)
+ );
       // playlist routes (private)
       this.get("/user/playlists", getAllPlaylistsHandler.bind(this));
       this.post("/user/playlists", addNewPlaylistHandler.bind(this));
