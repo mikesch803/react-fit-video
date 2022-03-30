@@ -8,7 +8,8 @@ import { StackListContainer } from "../index";
 export function VideoCard({ item }) {
   const [videoCardOptionState, setVideoCardOptionState] = useState(false);
   const { videoClickHandler } = useContext(VideoContext);
-  const {addVideoToHistoryHandler} = useContext(HistoryContext)
+  const {addVideoToHistoryHandler, historyVideos} = useContext(HistoryContext)
+  const notVideoInHistory = !historyVideos.some(video => video._id === item._id)
   const navigate = useNavigate();
   return (
     <div className="card card-vrt">
@@ -20,7 +21,7 @@ export function VideoCard({ item }) {
           onClick={() => {
             videoClickHandler(item);
             navigate(`/video/${item._id}`);
-            addVideoToHistoryHandler(item);
+            notVideoInHistory && addVideoToHistoryHandler(item);
           }}
         />
       </div>
