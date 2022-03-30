@@ -1,0 +1,21 @@
+.position-stack {
+  position: absolute;
+  border: 0.5px solid;
+  max-width: fit-content;
+  z-index: 5;
+  bottom: -2.6rem;
+  right: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.position-stack > ul > li {
+  display: flex;
+  align-items: center;
+}
+
+.m-r-span {
+  margin-right: 5px;
+}

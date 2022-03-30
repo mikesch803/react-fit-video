@@ -1,8 +1,8 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { Aside, VideoCard } from "../../components";
 import { VideoContext } from "../../context";
+import { LikeVideoContext } from "../../context/like-video-context";
 import {
   PlaylistIcon,
   ThumbsDownIcon,
@@ -11,13 +11,15 @@ import {
 } from "../../icons/Icons";
 import "./Video.css";
 export function Video() {
-  const { state, videoClickHandler } = useContext(VideoContext);
+  const { state } = useContext(VideoContext);
   const cateoryVideos = state.allVideos.filter(
     (item) => item.categoryName === state.currentVideo.categoryName
   );
   const mustWatchVideos = cateoryVideos.filter(
     (item) => item._id !== state.currentVideo._id
   );
+
+  const { addToLikedVideoHandler, removeFromLikeVideoHandler } = useContext(LikeVideoContext);
 
   return (
     <div className="video-grid-layout">
@@ -32,14 +34,14 @@ export function Video() {
           src={`https://www.youtube.com/embed/${state.currentVideo.src}?autoplay=1`}
         />
         <div className="video-btns">
-          <span>
+          <span onClick={() => addToLikedVideoHandler(state.currentVideo)}>
             <span>
               <ThumbsUpIcon />
-            </span>{" "}
+            </span>
             Like
           </span>
-          <span>
-            <span>
+          <span onClick={()=> removeFromLikeVideoHandler(state.currentVideo)}>
+            <span >
               <ThumbsDownIcon />
             </span>
             Unlike
@@ -62,13 +64,9 @@ export function Video() {
         <h2 className="video-title">Must watch</h2>
         <div className="video-container">
           {mustWatchVideos.map((item) => (
-            <Link
-              key={item._id}
-              to="/video"
-              onClick={() => videoClickHandler(item)}
-            >
+            <li key={item._id}>
               <VideoCard item={item} />
-            </Link>
+            </li>
           ))}
         </div>
       </aside>

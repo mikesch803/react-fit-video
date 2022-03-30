@@ -22,6 +22,7 @@ const VideoProvider = ({ children }) => {
     (async () => {
       try {
         const response = await axios.get("/api/categories");
+
         if (response.status === 200) {
           dispatch({
             type: "VIDEOS_BY_CATEGORY",
@@ -56,8 +57,6 @@ const VideoProvider = ({ children }) => {
     categoryVideos: [],
     currentVideo: {},
   });
-
-  console.log(state.currentVideo);
 
   return (
     <VideoContext.Provider value={{ state, dispatch, videoClickHandler }}>

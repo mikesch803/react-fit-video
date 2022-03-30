@@ -23,10 +23,10 @@ function App() {
       <Routes>
         <Route path="/trend" element={<VideoListing />} />
         <Route path="/" element={<Home />} />
-        <Route path="/video" element={<Video/>}/>
+        <Route path={`/video/:videoId`} element={<Video/>}/>
         <Route element={<NotAuth />}>
           <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />}/>
         </Route>
 
         <Route element={<Auth />}>
@@ -35,7 +35,7 @@ function App() {
           <Route path="/playlist" element={<Playlist />} />
           <Route path="/likedvideos" element={<LikedVideos />} />
         </Route>
-        <Route path="/mock" element={<Mockman />} />
+        <Route path="/mock" element={<Mockman />}/>
       </Routes>
     </div>
   );
