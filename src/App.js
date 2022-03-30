@@ -35,7 +35,7 @@ function App() {
           <Route path="/playlist" element={<Playlist />} />
           <Route path="/likedvideos" element={<LikedVideos />} />
         </Route>
-        <Route path="/mock" element={<Mockman />} />
+        <Route path="/mock" element={<Mockman />}/>
       </Routes>
     </div>
   );
