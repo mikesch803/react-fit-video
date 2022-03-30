@@ -1,6 +1,5 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { Aside, VideoCard } from "../../components";
 import { VideoContext } from "../../context";
 import { LikeVideoContext } from "../../context/like-video-context";
@@ -20,7 +19,7 @@ export function Video() {
     (item) => item._id !== state.currentVideo._id
   );
 
-  const { addToLikedVideoHandler, removeFromLikeVideoHandler, likeVideos } = useContext(LikeVideoContext);
+  const { addToLikedVideoHandler, removeFromLikeVideoHandler } = useContext(LikeVideoContext);
 
   return (
     <div className="video-grid-layout">
