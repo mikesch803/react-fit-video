@@ -1,8 +1,8 @@
 import React from "react";
 import { useContext } from "react";
 import { Aside, VideoCard } from "../../components";
-import { VideoContext } from "../../context";
-import { LikeVideoContext } from "../../context/like-video-context";
+import { VideoContext, WatchLaterContext } from "../../context";
+import { LikedVideoContext } from "../../context/like-video-context";
 import {
   PlaylistIcon,
   ThumbsDownIcon,
@@ -19,8 +19,13 @@ export function Video() {
     (item) => item._id !== state.currentVideo._id
   );
 
-  const { addToLikedVideoHandler, removeFromLikeVideoHandler } = useContext(LikeVideoContext);
-
+  const { addToLikedVideoHandler, removeFromLikedVideoHandler } =
+    useContext(LikedVideoContext);
+  const {
+    addVideoToWatchLaterHandler,
+    removeVideoFromWatchLaterHandler,
+    watchLaterVideos,
+  } = useContext(WatchLaterContext);
   return (
     <div className="video-grid-layout">
       <Aside />
@@ -40,18 +45,29 @@ export function Video() {
             </span>
             Like
           </span>
-          <span onClick={()=> removeFromLikeVideoHandler(state.currentVideo)}>
-            <span >
+          <span onClick={() => removeFromLikedVideoHandler(state.currentVideo)}>
+            <span>
               <ThumbsDownIcon />
             </span>
             Unlike
           </span>
-          <span>
-            <span>
-              <WatchLaterIcon />
+          {watchLaterVideos.findIndex(
+            (video) => video._id === state.currentVideo._id
+          ) !== -1 ? (
+            <span onClick={()=> removeVideoFromWatchLaterHandler(state.currentVideo)}>
+              <span>
+                <WatchLaterIcon />
+              </span>
+              Remove from watch later
             </span>
-            Add to watch later
-          </span>
+          ) : (
+            <span onClick={()=>addVideoToWatchLaterHandler(state.currentVideo)}>
+              <span>
+                <WatchLaterIcon />
+              </span>
+              Add to watch later
+            </span>
+          )}
           <span>
             <span>
               <PlaylistIcon />

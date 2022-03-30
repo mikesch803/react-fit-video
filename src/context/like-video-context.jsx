@@ -1,10 +1,10 @@
 import axios from "axios";
 import { createContext, useState } from "react";
 
-const LikeVideoContext = createContext();
+const LikedVideoContext = createContext();
 
-const LikeVideoProvider = ({ children }) => {
-  const [likeVideos, setLikeVideos] = useState([]);
+const LikedVideoProvider = ({ children }) => {
+  const [likedVideos, setLikedVideos] = useState([]);
 
   const addToLikedVideoHandler = (video) => {
       
@@ -23,7 +23,7 @@ const LikeVideoProvider = ({ children }) => {
           }
         );
         if (response.status === 201) {
-          setLikeVideos(response.data.likes);
+          setLikedVideos(response.data.likes);
         }
       } catch (err) {
         console.error(err);
@@ -31,7 +31,7 @@ const LikeVideoProvider = ({ children }) => {
     })();
   };
 
-  const removeFromLikeVideoHandler = (video) => {
+  const removeFromLikedVideoHandler = (video) => {
       
   const encodedToken = localStorage.getItem("token");
     (async () => {
@@ -41,9 +41,8 @@ const LikeVideoProvider = ({ children }) => {
             authorization: encodedToken,
           },
         });
-        console.log(response);
         if (response.status === 200) {
-          setLikeVideos(response.data.likes);
+          setLikedVideos(response.data.likes);
         }
       } catch (err) {
         console.error(err);
@@ -52,17 +51,17 @@ const LikeVideoProvider = ({ children }) => {
   };
 
   return (
-    <LikeVideoContext.Provider
+    <LikedVideoContext.Provider
       value={{
         addToLikedVideoHandler,
-        removeFromLikeVideoHandler,
-        likeVideos,
-        setLikeVideos
+        removeFromLikedVideoHandler,
+        likedVideos,
+        setLikedVideos
       }}
     >
       {children}
-    </LikeVideoContext.Provider>
+    </LikedVideoContext.Provider>
   );
 };
 
-export { LikeVideoContext, LikeVideoProvider };
+export { LikedVideoContext, LikedVideoProvider };

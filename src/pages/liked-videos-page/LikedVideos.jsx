@@ -4,10 +4,10 @@ import { useContext } from "react";
 import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
-import { LikeVideoContext } from "../../context";
+import { LikedVideoContext } from "../../context";
 
 export function LikedVideos() {
-  const { likeVideos, setLikeVideos } = useContext(LikeVideoContext);
+  const { likedVideos, setLikedVideos } = useContext(LikedVideoContext);
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
     (async () => {
@@ -18,20 +18,20 @@ export function LikedVideos() {
           },
         });
         if (response.status === 200) {
-          setLikeVideos(response.data.likes);
+          setLikedVideos(response.data.likes);
         }
       } catch (err) {
         console.error(err);
       }
     })();
-  }, [encodedToken, setLikeVideos]);
+  }, [encodedToken, setLikedVideos]);
   return (
     <div className="liked-video-grid-layout">
       <Aside />
       <main className="liked-video-main">
         <h2 className="liked-video-title">Liked Videos</h2>
         <div className="video-container">
-          {likeVideos.map((item) => (
+          {likedVideos.map((item) => (
             <li key={item._id}>
               <VideoCard item={item} />
             </li>
