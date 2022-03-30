@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/trend" element={<VideoListing />} />
         <Route path="/" element={<Home />} />
-        <Route path="/video" element={<Video/>}/>
+        <Route path={`/video/:videoId`} element={<Video/>}/>
         <Route element={<NotAuth />}>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Aside, VideoCard } from "../../components";
 import { VideoContext } from "../../context";
 import { useCategory } from "../../hooks/useCategory";
@@ -10,7 +9,7 @@ export function Home() {
 
   const allVideosHandler = () => setCateogoryVideos(state.allVideos);
 
-  const { state, videoClickHandler } = useContext(VideoContext);
+  const { state } = useContext(VideoContext);
 
   useEffect(() => {
     setCateogoryVideos(state.allVideos);
@@ -37,13 +36,9 @@ export function Home() {
         ))}
         <div className="video-container">
           {categoryVideos.map((item) => (
-            <Link
-              key={item._id}
-              onClick={() => videoClickHandler(item)}
-              to="/video"
-            >
+            <li key={item._id}>
               <VideoCard item={item} />
-            </Link>
+            </li>
           ))}
         </div>
       </div>
