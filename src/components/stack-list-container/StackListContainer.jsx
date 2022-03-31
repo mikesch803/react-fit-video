@@ -1,5 +1,9 @@
 import { useContext } from "react";
-import { LikedVideoContext, WatchLaterContext } from "../../context";
+import {
+  HistoryContext,
+  LikedVideoContext,
+  WatchLaterContext,
+} from "../../context";
 import {
   ThumbsDownIcon,
   ThumbsUpIcon,
@@ -17,16 +21,19 @@ export const StackListContainer = ({ item }) => {
     watchLaterVideos,
   } = useContext(WatchLaterContext);
 
+  const { historyVideos, removeVideoFromHistoryHandler } =
+    useContext(HistoryContext);
+
   return (
     <div className="stack-list-container position-stack">
       <ul>
         {watchLaterVideos.findIndex((video) => video._id === item._id) !==
         -1 ? (
-          <li className="btn btn-link" onClick={() => removeVideoFromWatchLaterHandler(item)}>
-            <span
-              className="m-r-span"
-            
-            >
+          <li
+            className="btn btn-link"
+            onClick={() => removeVideoFromWatchLaterHandler(item)}
+          >
+            <span className="m-r-span">
               <WatchLaterIcon />
             </span>
             Remove from watch later
@@ -61,6 +68,14 @@ export const StackListContainer = ({ item }) => {
               <ThumbsUpIcon />
             </span>
             Like video
+          </li>
+        )}
+        {historyVideos.includes(item) && (
+          <li
+            className="btn btn-link"
+            onClick={() => removeVideoFromHistoryHandler(item)}
+          >
+            <span className="m-r-span">&times;</span>Remove from history
           </li>
         )}
       </ul>

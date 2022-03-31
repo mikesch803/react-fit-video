@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./VideoCard.css";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { VideoContext } from "../../context";
+import { HistoryContext, VideoContext } from "../../context";
 import { MoreOptionsIcon } from "../../icons/Icons";
 import { StackListContainer } from "../index";
 export function VideoCard({ item }) {
   const [videoCardOptionState, setVideoCardOptionState] = useState(false);
   const { videoClickHandler } = useContext(VideoContext);
-
+  const {addVideoToHistoryHandler, historyVideos} = useContext(HistoryContext)
+  const notVideoInHistory = !historyVideos.some(video => video._id === item._id)
   const navigate = useNavigate();
   return (
     <div className="card card-vrt">
@@ -20,6 +21,7 @@ export function VideoCard({ item }) {
           onClick={() => {
             videoClickHandler(item);
             navigate(`/video/${item._id}`);
+            notVideoInHistory && addVideoToHistoryHandler(item);
           }}
         />
       </div>
