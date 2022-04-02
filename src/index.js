@@ -8,6 +8,7 @@ import {
   AuthProvider,
   HistoryProvider,
   LikedVideoProvider,
+  PlaylistProvider,
   VideoProvider,
   WatchLaterProvider,
 } from "./context";
@@ -18,15 +19,17 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <VideoProvider>
-        <HistoryProvider>
-          <WatchLaterProvider>
-            <LikedVideoProvider>
-              <AuthProvider>
-                <App />
-              </AuthProvider>
-            </LikedVideoProvider>
-          </WatchLaterProvider>
-        </HistoryProvider>
+        <PlaylistProvider>
+          <HistoryProvider>
+            <WatchLaterProvider>
+              <LikedVideoProvider>
+                <AuthProvider>
+                  <App />
+                </AuthProvider>
+              </LikedVideoProvider>
+            </WatchLaterProvider>
+          </HistoryProvider>
+        </PlaylistProvider>
       </VideoProvider>
     </Router>
   </React.StrictMode>,

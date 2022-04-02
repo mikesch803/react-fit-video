@@ -1,7 +1,9 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   HistoryContext,
   LikedVideoContext,
+  PlaylistContext,
   WatchLaterContext,
 } from "../../context";
 import {
@@ -23,6 +25,16 @@ export const StackListContainer = ({ item }) => {
 
   const { historyVideos, removeVideoFromHistoryHandler } =
     useContext(HistoryContext);
+
+  const {state, 
+    dispatch,
+    addPlaylistHandler,
+    removePlaylistHandler,
+    addVideoToPlaylistHandler,
+    removeVideoFromPlaylistHandler,
+    getPlaylistHandler,} = useContext(PlaylistContext);
+
+  const navigate = useNavigate();
 
   return (
     <div className="stack-list-container position-stack">
@@ -78,6 +90,12 @@ export const StackListContainer = ({ item }) => {
             <span className="m-r-span">&times;</span>Remove from history
           </li>
         )}
+        {state.currentPlaylist && <li
+            className="btn btn-link"
+            onClick={() => {console.log('working'); removeVideoFromPlaylistHandler(state.currentPlaylist._id, item)}}
+          >
+            <span className="m-r-span">&times;</span>Remove video
+          </li>}
       </ul>
     </div>
   );

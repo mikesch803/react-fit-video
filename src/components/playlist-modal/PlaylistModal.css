@@ -1,0 +1,36 @@
+.modal-playlist {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  background-color: white;
+  width: fit-content;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.modal-playlist > p {
+  display: flex;
+}
+
+.modal-close {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.playlist-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.playlist-input > input {
+    border:none;
+    border-bottom: 1px solid;
+}
+
+.all-playlist {
+  cursor: pointer;
+}
