@@ -90,7 +90,7 @@ export const StackListContainer = ({ item }) => {
             <span className="m-r-span">&times;</span>Remove from history
           </li>
         )}
-        {state.currentPlaylist && <li
+        {state.currentPlaylist.videos.includes(item) && <li
             className="btn btn-link"
             onClick={() => {console.log('working'); removeVideoFromPlaylistHandler(state.currentPlaylist._id, item)}}
           >
