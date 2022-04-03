@@ -94,7 +94,12 @@ li {
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
+    width: fit-content;
 }
 
-
-
+.btn-remove-position {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

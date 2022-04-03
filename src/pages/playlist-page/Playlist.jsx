@@ -112,6 +112,7 @@ export function Playlist() {
           state.currentPlaylist.videos?.map((video) => (
             <div key={video._id} className="playlist-video-card">
               <VideoCard item={video} />
+              <span className="btn btn-ss btn-link btn-remove-position" onClick={()=>removeVideoFromPlaylistHandler(state.currentPlaylist._id, video)}>remove</span>
             </div>
           ))}
       </main>
