@@ -1,0 +1,17 @@
+.not-found-grid-layout {
+  display: grid;
+  min-height: 100vh;
+  grid-template-areas:
+    "header header header"
+    "img img img ";
+}
+
+.not-found-img {
+  grid-area: img;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+}

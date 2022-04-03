@@ -9,6 +9,7 @@ import {
   LikedVideos,
   Login,
   NotAuth,
+  NotFound,
   Playlist,
   Signup,
   Video,
@@ -24,6 +25,8 @@ function App() {
         <Route path="/trend" element={<VideoListing />} />
         <Route path="/" element={<Home />} />
         <Route path={`/video/:videoId`} element={<Video/>}/>
+        <Route path={`/category:categoryId`} element={<Home/>}/>
+        <Route path="*" element={<NotFound/>}/>
         <Route element={<NotAuth />}>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />}/>
@@ -33,6 +36,7 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/watchlater" element={<WatchLater />} />
           <Route path="/playlist" element={<Playlist />} />
+          <Route path={`/playlist/:playlistId`} element={<Playlist />} />
           <Route path="/likedvideos" element={<LikedVideos />} />
         </Route>
         <Route path="/mock" element={<Mockman />}/>

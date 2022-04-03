@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Aside, VideoCard } from "../../components";
 import { VideoContext } from "../../context";
 import { useCategory } from "../../hooks/useCategory";
 import "./Home.css";
 export function Home() {
   const { categoryHandler, setCateogoryVideos, categoryVideos } = useCategory();
-
+const navigate = useNavigate();
   const allVideosHandler = () => setCateogoryVideos(state.allVideos);
 
   const { state } = useContext(VideoContext);
