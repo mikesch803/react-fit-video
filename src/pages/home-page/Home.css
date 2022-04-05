@@ -1,16 +1,23 @@
 .home-grid-layout {
-    display: grid;
-    grid-template-areas: "header header header"
+  display: grid;
+
+  grid-template-columns: 15.6rem 1fr;
+  grid-template-areas:
+    "header header header"
     "aside main main";
 }
 
 .home-main {
-    grid-area: main;
-    margin: auto;
-    max-width: 80%;
+  grid-area: main;
+  margin: 1rem;
 }
 
 .btn-round {
-    border-radius: 1.5rem;
-    margin: 1rem;
+  border-radius: 1.5rem;
+  margin:  0 1rem 1rem 1rem;
+}
+
+.btn-active {
+  background-color: var(--COLOR-PRIMARY-DARK);
+  color: var(--COLOR-FT);
 }

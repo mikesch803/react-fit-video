@@ -2,11 +2,14 @@ import { createContext, useReducer, useState } from "react";
 import axios from "axios";
 import { PassWordNotShowIcon } from "../icons/Icons";
 import { AuthReducer } from "../reducer/AuthReducer";
+import { useToast } from "./toast-context";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [userState, setUserState] = useState(false);
-
+  const [userState, setUserState] = useState(
+    localStorage?.token ? true : false
+  );
+  const { setToastMsg, setToastStyles, setToastState } = useToast();
   const [state, dispatch] = useReducer(AuthReducer, {
     field: {},
     passwordType: "password",
@@ -27,11 +30,15 @@ const AuthProvider = ({ children }) => {
         const response = await axios.post(`/api/auth/signup`, state.field);
         if (response.status === 201) {
           setUserState(true);
+          setToastStyles("alert alert-success");
+          setToastMsg("Sign up successfully");
+          setToastState(true);
+          setTimeout(() => {
+            setToastState(false);
+          }, 1500);
+          localStorage.setItem("token", response.data.encodedToken);
         }
         console.log(response);
-        console.log(state.userState);
-        // saving the encodedToken in the localStorage
-        localStorage.setItem("token", response.data.encodedToken);
       } catch (error) {
         console.log(error);
       }
@@ -62,11 +69,18 @@ const AuthProvider = ({ children }) => {
     if (state.field.email && state.field.password) {
       try {
         const response = await axios.post(`/api/auth/login`, state.field);
-        // const encodedToken = localStorage.getItem("token");
-        localStorage.setItem("token", response.data.encodedToken);
+
         if (response.status === 200) {
           setUserState(true);
+          setToastStyles("alert alert-success");
+          setToastMsg("Login successfully");
+          setToastState(true);
+          setTimeout(() => {
+            setToastState(false);
+          }, 1500);
+          localStorage.setItem("token", response.data.encodedToken);
         }
+
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -85,9 +99,27 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const logoutHandler = () => {
+    localStorage.clear();
+    setUserState(false);
+    setToastStyles("alert alert-success");
+    setToastMsg("Logout successfully");
+    setToastState(true);
+    setTimeout(() => {
+      setToastState(false);
+    }, 1500);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ state, dispatch, signupHandler, loginUserHandler, userState }}
+      value={{
+        state,
+        dispatch,
+        signupHandler,
+        loginUserHandler,
+        userState,
+        logoutHandler,
+      }}
     >
       {children}
     </AuthContext.Provider>

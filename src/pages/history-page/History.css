@@ -1,73 +1,55 @@
 .history-video-grid-layout {
-    display: grid;
-    grid-template-areas:
-      "header header header"
-      "aside main main";
-  }
-
-.history-video-main {
-grid-area: main;
-margin: auto;
-max-width: 80%;
+  display: grid;
+  grid-template-columns: 15.6rem 1fr;
+  grid-template-areas:
+    "header header header"
+    "aside main main";
 }
 
-.video-container {
-display: flex;
-flex-wrap: wrap;
-gap: 2rem;
+.history-video-main {
+  grid-area: main;
+  margin: 1rem;
+}
 
+.video-container,
+.card-desc,
+.history-video-title {
+    display: flex;
+}
+
+
+.video-container {
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .card-vrt {
-width: 20rem;
+  width: 20rem;
 }
 
 .card-desc {
-display: flex;
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-img {
-padding: 0;
-object-fit: contain;
+  padding: 0;
+  object-fit: contain;
 }
 
 .card-img-container {
-height: auto;
-}
-
-.flex-1 {
-flex:1
-}
-
-.m-l-1 {
-margin-left: 1rem;
+  height: auto;
 }
 
 .history-video-title {
-margin: 1rem 0rem;
-display: flex;
+  margin-bottom: 1rem;
 }
 
-.m-l-auto {
-    margin-left: auto;
-}
-
-.card:hover, .card{
-border: none
-}
-
-li {
-list-style: none;
+.card:hover,
+.card {
+  border: none;
 }
 
 .history-list {
-    position: relative;
-}
-
-.btn-remove {
-    color: red;
-    position: absolute;
-    top: 10px;
+  position: relative;
 }

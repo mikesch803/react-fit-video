@@ -1,9 +1,9 @@
 .playlist-grid-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 15.6rem 1fr;
   grid-template-areas:
-    "header header header header"
-    "aside main main main";
+    "header header header "
+    "aside main main ";
 }
 
 .playlist-main {
@@ -11,34 +11,22 @@
   margin: 1rem;
 }
 
-.flex-1 {
-  flex: 1;
-}
-
-.m-l-1 {
-  margin-left: 1rem;
-}
-
 .playlist-title {
   margin-bottom: 1rem;
+}
+
+.playlist-title,
+.modal-playlist,
+.modal-playlist > p,
+.playlist-input,
+.playlist-container,
+.playlist-video-card,
+.playlist-container > li > h3,
+.playlist-container > li > p {
   display: flex;
-  gap: 1rem;
 }
 
-.playlist-list-title,
-.playlist-all > li > p {
-    display: flex;
-}
-
-.m-l-auto {
-  margin-left: auto;
-}
-
-li {
-  list-style: none;
-}
 .modal-playlist {
-  display: flex;
   flex-direction: column;
   border: 1px solid;
   background-color: white;
@@ -47,26 +35,21 @@ li {
   padding: 0.5rem;
 }
 
-.modal-playlist > p {
-  display: flex;
-  /* margin: 0; */
-}
-
 .playlist-btn-close {
   margin-left: auto;
-  color: red;
+  color: var(--COLOR-ERROR);
   cursor: pointer;
 }
 
-.p-0 {
-  padding: 0;
+.playlist-input,
+.playlist-video-card,
+.playlist-title {
+  gap: 1rem;
 }
 
 .playlist-input {
-  display: flex;
   flex-direction: column;
   max-width: 20rem;
-  gap: 1rem;
 }
 
 .playlist-input > input {
@@ -76,30 +59,28 @@ li {
   background: none;
 }
 
-.playlist-all {
-  display: flex;
+.playlist-container {
   gap: 0.5rem;
   margin: 1rem 0;
-  max-width: 15rem;
+  flex-wrap: wrap;
 }
 
-.playlist-list {
+.playlist-container > li {
   padding: 0.5rem;
   border-radius: 5px;
   border: 1px solid;
   background-color: var(--COLOR-FT);
+  cursor: pointer;
 }
 
 .playlist-video-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    position: relative;
-    width: fit-content;
+  flex-wrap: wrap;
+  align-items: center;
+  width: fit-content;
 }
 
 .btn-remove-position {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

@@ -10,18 +10,19 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
     removeVideoFromPlaylistHandler,
   } = useContext(PlaylistContext);
   return (
-    <div className="modal-playlist">
-      <p className="">
-        Save to playlist{" "}
+    <div className="video-modal-playlist">
+      <p>
+        Save to playlist
         <span
-          className="modal-close"
+          className="video-modal-close"
           onClick={() => setSavePlaylistModal(false)}
         >
           &times;
         </span>
       </p>
-      {state.allPlaylist.map((item) => (
-        <label key={item._id}>
+      <ul>{state.allPlaylist.map((item) => (
+        <li key={item._id}>
+        <label>
           <input
             type="checkbox"
             checked={item.videos.some((ele) => ele._id === video._id)}
@@ -32,10 +33,10 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
             }}
           />
           {item.title}
-        </label>
-      ))}
+        </label></li>
+      ))}</ul>
       {state.inputState && (
-        <div className="playlist-input">
+        <div className="video-playlist-input">
           <label>Title</label>
           <input
             type="text"
@@ -62,7 +63,7 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
       )}
       {state.inputState ? (
         <button
-          className="btn btn-link btn-ss p-0"
+          className="btn btn-link btn-ss p-half"
           onClick={() => {
             addPlaylistHandler(state.field);
           }}
@@ -71,7 +72,7 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
         </button>
       ) : (
         <button
-          className="btn btn-ss btn-link p-0"
+          className="btn btn-ss btn-link p-half"
           onClick={() => dispatch({ type: "INPUT_STATE" })}
         >
           + create new playlist

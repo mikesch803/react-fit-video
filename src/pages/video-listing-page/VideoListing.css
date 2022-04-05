@@ -1,59 +1,46 @@
 .trend-video-grid-layout {
-        display: grid;
-        grid-template-areas:
-          "header header header"
-          "aside main main";
-      }
+  display: grid;
+  grid-template-columns: 15.6rem 1fr;
+  grid-template-areas:
+    "header header header"
+    "aside main main";
+}
 
 .trend-main {
-    grid-area: main;
-    margin: auto;
-    max-width: 80%;
+  grid-area: main;
+  margin: 1rem;
 }
 
 .video-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .card-vrt {
-    width: 20rem;
+  width: 20rem;
 }
 
 .card-desc {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-img {
-    padding: 0;
-    object-fit: contain;
+  padding: 0;
+  object-fit: contain;
 }
 
 .card-img-container {
-    height: auto;
-}
-
-.flex-1 {
-    flex:1
-}
-
-.m-l-1 {
-    margin-left: 1rem;
+  height: auto;
 }
 
 .trend-title {
-    margin: 1rem 0rem;
-
+  margin-bottom: 1rem;
 }
 
-.card:hover, .card{
-    border: none
-}
-
-li {
-    list-style: none;
+.card:hover,
+.card {
+  border: none;
 }

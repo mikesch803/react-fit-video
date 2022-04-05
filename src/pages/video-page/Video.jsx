@@ -2,10 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { Aside, VideoCard } from "../../components";
 import { PlaylistModal } from "../../components/playlist-modal/PlaylistModal";
-import {
-  VideoContext,
-  WatchLaterContext,
-} from "../../context";
+import { VideoContext, WatchLaterContext } from "../../context";
 import { LikedVideoContext } from "../../context/like-video-context";
 import usePlaylistModal from "../../hooks/usePlaylistModal";
 import {
@@ -16,7 +13,6 @@ import {
 } from "../../icons/Icons";
 import "./Video.css";
 export function Video() {
-
   const { state } = useContext(VideoContext);
   const cateoryVideos = state.allVideos.filter(
     (item) => item.categoryName === state.currentVideo.categoryName
@@ -33,11 +29,17 @@ export function Video() {
     watchLaterVideos,
   } = useContext(WatchLaterContext);
 
-  const {savePlaylistModal, setSavePlaylistModal} = usePlaylistModal();
+  const { likedVideos } = useContext(LikedVideoContext);
+
+  const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
 
   return (
     <>
-      <div className={savePlaylistModal?`video-grid-layout blur`:`video-grid-layout`} >
+      <div
+        className={
+          savePlaylistModal ? `video-grid-layout gray` : `video-grid-layout`
+        }
+      >
         <Aside />
         <main className="video-main">
           <h2 className="video-title">{state.currentVideo.title}</h2>
@@ -49,20 +51,23 @@ export function Video() {
             src={`https://www.youtube.com/embed/${state.currentVideo.src}?autoplay=1`}
           />
           <div className="video-btns">
-            <span onClick={() => addToLikedVideoHandler(state.currentVideo)}>
-              <span>
-                <ThumbsUpIcon />
+            {likedVideos.some(
+              (video) => video._id === state.currentVideo._id
+            ) ? (
+              <span onClick={() => removeFromLikedVideoHandler(state.currentVideo)}>
+                <span>
+                  <ThumbsUpIcon />
+                </span>
+                Liked
               </span>
-              Like
-            </span>
-            <span
-              onClick={() => removeFromLikedVideoHandler(state.currentVideo)}
-            >
-              <span>
-                <ThumbsDownIcon />
+            ) : (
+              <span onClick={() => addToLikedVideoHandler(state.currentVideo)}>
+                <span>
+                  <ThumbsUpIcon />
+                </span>
+                Like
               </span>
-              Unlike
-            </span>
+            )}
             {watchLaterVideos.findIndex(
               (video) => video._id === state.currentVideo._id
             ) !== -1 ? (
@@ -105,12 +110,14 @@ export function Video() {
           </div>
         </aside>
       </div>
-      {savePlaylistModal && (<div className="modal-position">
-            <PlaylistModal
-              setSavePlaylistModal={setSavePlaylistModal}
-              video={state.currentVideo}
-            /></div>
-          )}
+      {savePlaylistModal && (
+        <div className="modal-position">
+          <PlaylistModal
+            setSavePlaylistModal={setSavePlaylistModal}
+            video={state.currentVideo}
+          />
+        </div>
+      )}
     </>
   );
 }

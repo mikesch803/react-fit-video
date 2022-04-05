@@ -1,12 +1,13 @@
 import axios from "axios";
 import { createContext } from "react";
 import { useState } from "react";
+import { useToast } from "./toast-context";
 
 const WatchLaterContext = createContext();
 
 const WatchLaterProvider = ({ children }) => {
   const [watchLaterVideos, setWatchLaterVideos] = useState([]);
-
+  const { setToastMsg, setToastState, setToastStyles } = useToast();
   const addVideoToWatchLaterHandler = (video) => {
     const encodedToken = localStorage.getItem("token");
     (async () => {
@@ -24,6 +25,12 @@ const WatchLaterProvider = ({ children }) => {
         );
         if (response.status === 201) {
           setWatchLaterVideos(response.data.watchlater);
+          setToastStyles("alert alert-info");
+          setToastMsg("Video is added to watch later");
+          setToastState(true);
+          setTimeout(() => {
+            setToastState(false);
+          }, 1500);
         }
       } catch (err) {
         console.error(err);
@@ -45,6 +52,12 @@ const WatchLaterProvider = ({ children }) => {
         );
         if (response.status === 200) {
           setWatchLaterVideos(response.data.watchlater);
+          setToastStyles("alert alert-info");
+          setToastMsg("video is removed from watch later");
+          setToastState(true);
+          setTimeout(() => {
+            setToastState(false);
+          }, 1500);
         }
       } catch (err) {
         console.error(err);

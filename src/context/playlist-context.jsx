@@ -1,10 +1,14 @@
 import axios from "axios";
 import { createContext, useReducer } from "react";
 import { playlistReducer } from "../reducer/PlaylistReducer";
+import { useToast } from "./toast-context";
 
 const PlaylistContext = createContext();
 
 const PlaylistProvider = ({ children }) => {
+
+  const {setToastMsg, setToastState, setToastStyles} = useToast();
+
   const [state, dispatch] = useReducer(playlistReducer, {
     allPlaylist: [],
     InputState: false,
@@ -92,6 +96,12 @@ const PlaylistProvider = ({ children }) => {
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
+          setToastStyles("alert alert-info")
+          setToastMsg("Playlist updated")
+          setToastState(true);
+          setTimeout(()=>{
+            setToastState(false)
+          },1500)
         }
       } catch (err) {
         console.error(err);
@@ -125,6 +135,12 @@ const PlaylistProvider = ({ children }) => {
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
+          setToastStyles("alert alert-info")
+          setToastMsg("playlist updated")
+          setToastState(true);
+          setTimeout(()=>{
+            setToastState(false)
+          },1500)
         }
       } catch (err) {
         console.error(err);

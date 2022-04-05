@@ -34,7 +34,7 @@ export function Playlist() {
         console.error(err);
       }
     })();
-  }, [dispatch,removePlaylistHandler, removeVideoFromPlaylistHandler, state]);
+  }, [dispatch, removePlaylistHandler, removeVideoFromPlaylistHandler, state]);
 
   return (
     <div className="playlist-grid-layout">
@@ -77,20 +77,20 @@ export function Playlist() {
               className="btn btn-primary btn-ss"
               onClick={() => {
                 addPlaylistHandler(state.field);
+                setSavePlaylistModal(false)
               }}
             >
               create
             </button>
           </div>
         )}
-        <div className="playlist-all">
+        <ul className="playlist-container">
           {state.allPlaylist.map((item) => (
-            <li key={item._id} className="playlist-list">
+            <li key={item._id}>
               <h3
-                className="playlist-list-title"
                 onClick={() => {
                   getPlaylistHandler(item);
-                   navigate(`/playlist/${item._id}`)
+                  navigate(`/playlist/${item._id}`);
                 }}
               >
                 {item.title}
@@ -99,22 +99,37 @@ export function Playlist() {
                 {item.videos.length} videos
                 <span
                   className="playlist-btn-close"
-                  onClick={() => { removePlaylistHandler(item); navigate("/playlist") }}
+                  onClick={() => {
+                    removePlaylistHandler(item);
+                    navigate("/playlist");
+                  }}
                 >
                   &times;
                 </span>
               </p>
             </li>
           ))}
-        </div>
-        <h3>{state.currentPlaylist.title}</h3>
-        {state.currentPlaylist &&
-          state.currentPlaylist.videos?.map((video) => (
-            <div key={video._id} className="playlist-video-card">
-              <VideoCard item={video} />
-              <span className="btn btn-ss btn-link btn-remove-position" onClick={()=>removeVideoFromPlaylistHandler(state.currentPlaylist._id, video)}>remove</span>
-            </div>
-          ))}
+        </ul>
+        <h3 className="m-b-1">{state.currentPlaylist.title}</h3>
+        <ul className="playlist-video-card">
+          {state.currentPlaylist &&
+            state.currentPlaylist.videos?.map((video) => (
+              <li key={video._id} className="p-relative">
+                <VideoCard item={video} />
+                <span
+                  className="btn btn-ss btn-link btn-remove-position"
+                  onClick={() =>
+                    removeVideoFromPlaylistHandler(
+                      state.currentPlaylist._id,
+                      video
+                    )
+                  }
+                >
+                  remove
+                </span>
+              </li>
+            ))}
+        </ul>
       </main>
     </div>
   );

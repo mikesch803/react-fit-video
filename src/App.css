@@ -1,0 +1,29 @@
+.flex-1 {
+  flex: 1;
+}
+
+.m-l-1 {
+  margin-left: 1rem;
+}
+
+.m-b-1 {
+  margin-bottom: 1rem;
+}
+
+.m-l-auto {
+  margin-left: auto;
+}
+
+li {
+  list-style: none;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+
+.p-relative {
+    position: relative;
+  }
+  

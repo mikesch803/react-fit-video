@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Header } from "./components";
+import { Header, Toast } from "./components";
 import Mockman from "mockman-js";
 import {
   Auth,
@@ -16,11 +16,14 @@ import {
   VideoListing,
   WatchLater,
 } from "./pages";
+import { useToast } from "./context";
 
 function App() {
+  const {toastState} = useToast();
   return (
     <div className="App">
       <Header />
+      {toastState && <Toast/>}
       <Routes>
         <Route path="/trend" element={<VideoListing />} />
         <Route path="/" element={<Home />} />
