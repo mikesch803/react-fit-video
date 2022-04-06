@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import { useToast } from "./toast-context";
 
 const HistoryContext = createContext();
@@ -99,4 +99,6 @@ const HistoryProvider = ({ children }) => {
   );
 };
 
-export { HistoryContext, HistoryProvider };
+const useHistory = () => useContext(HistoryContext);
+
+export { HistoryContext, HistoryProvider, useHistory };

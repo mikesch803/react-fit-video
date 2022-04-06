@@ -29,21 +29,25 @@
     display: flex;
     align-items: center;
     margin: 0.5rem 0;
-    text-transform: uppercase;
 }
 
-.video-btns > span {
+.video-btns > button {
     display: flex;
     align-items: center;
     margin-right: 10px;
     font-size: 1rem;
     cursor: pointer;
+    background: none;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
-.video-btns > span > span {
+.video-btns > button > span {
     margin-right: 5px;
     display: flex;
     align-items: center;
+    font-size: 1.5rem;
 }
 
 .modal-position {
@@ -60,4 +64,8 @@
 
 .gray {
   background-color: rgba(200, 200, 200);
+}
+
+.btn-fill {
+  color:var(--COLOR-PRIMARY-DARK)
 }

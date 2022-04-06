@@ -1,14 +1,13 @@
 import React from "react";
 import "./WatchLater.css";
-import { useContext } from "react";
 import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
-import { WatchLaterContext } from "../../context";
+import { useWatchLater } from "../../context";
 
 export function WatchLater() {
   const { watchLaterVideos, setWatchLaterVideos } =
-    useContext(WatchLaterContext);
+    useWatchLater();
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
     (async () => {

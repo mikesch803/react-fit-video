@@ -1,14 +1,13 @@
 import React from "react";
 import "./History.css";
-import { useContext } from "react";
 import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
-import { HistoryContext } from "../../context";
+import { useHistory } from "../../context";
 
 export function History() {
   const { historyVideos, setHistoryVideos, clearHistoryHandler } =
-    useContext(HistoryContext);
+    useHistory();
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
     (async () => {

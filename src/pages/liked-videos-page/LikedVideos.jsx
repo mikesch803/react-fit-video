@@ -1,16 +1,16 @@
 import React from "react";
 import "./LikedVideos.css";
-import { useContext } from "react";
 import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
-import { LikedVideoContext } from "../../context";
+import { useLikedVideo } from "../../context";
 
 export function LikedVideos() {
-  const { likedVideos, setLikedVideos } = useContext(LikedVideoContext);
+  const { likedVideos, setLikedVideos } = useLikedVideo();
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
-    (async () => {
+    // if(encodedToken){
+      (async () => {
       try {
         const response = await axios.get("/api/user/likes", {
           headers: {
@@ -19,11 +19,13 @@ export function LikedVideos() {
         });
         if (response.status === 200) {
           setLikedVideos(response.data.likes);
+          console.log(response)
         }
       } catch (err) {
         console.error(err);
       }
     })();
+  // }
   }, [encodedToken, setLikedVideos]);
   return (
     <div className="liked-video-grid-layout">

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context";
+import { useAuth } from "../../context";
+import { PassWordNotShowIcon, PassWordShowIcon } from "../../icons/Icons";
 import "./Signup.css";
 
 export function Signup() {
-const {signupHandler, state, dispatch} = useContext(AuthContext);
+const {signupHandler, state, dispatch} = useAuth();
   
   return (
     <div className="grid-layout-signup">
@@ -57,7 +58,7 @@ const {signupHandler, state, dispatch} = useContext(AuthContext);
             className="form-passwordeye"
             onClick={() => dispatch({ type: "CHANGE_TYPE" })}
           >
-            {state.showPasswordIcon}
+            {state.passwordType === 'text' ?  <PassWordShowIcon/>:<PassWordNotShowIcon/>}
           </span>
         </div>
         {state.passwordErrState && (

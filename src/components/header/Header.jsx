@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context";
+import { useAuth } from "../../context";
 import "./Header.css";
 export function Header() {
-  const {userState, logoutHandler} = useContext(AuthContext)
+  const { logoutHandler} = useAuth();
   return (
       <div className="navbar">
         <h1 className="navbar-title">

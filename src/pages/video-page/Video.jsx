@@ -1,35 +1,26 @@
 import React from "react";
-import { useContext } from "react";
-import { Aside, VideoCard } from "../../components";
-import { PlaylistModal } from "../../components/playlist-modal/PlaylistModal";
-import { VideoContext, WatchLaterContext } from "../../context";
-import { LikedVideoContext } from "../../context/like-video-context";
-import usePlaylistModal from "../../hooks/usePlaylistModal";
-import {
-  PlaylistIcon,
-  ThumbsDownIcon,
-  ThumbsUpIcon,
-  WatchLaterIcon,
-} from "../../icons/Icons";
 import "./Video.css";
-export function Video() {
-  const { state } = useContext(VideoContext);
-  const cateoryVideos = state.allVideos.filter(
-    (item) => item.categoryName === state.currentVideo.categoryName
-  );
-  const mustWatchVideos = cateoryVideos.filter(
-    (item) => item._id !== state.currentVideo._id
-  );
+import { Aside, PlaylistModal, VideoCard } from "../../components";
+import { useLikedVideo, useVideo, useWatchLater } from "../../context";
+import { PlaylistIcon, ThumbsUpIcon, WatchLaterIcon } from "../../icons/Icons";
+import {
+  mustWatchVideos,
+  checkLikedVideo,
+  checkWatchLater,
+} from "../../utils/functions";
+import { usePlaylistModal } from "../../hooks";
 
-  const { addToLikedVideoHandler, removeFromLikedVideoHandler } =
-    useContext(LikedVideoContext);
+export function Video() {
+  const { state } = useVideo();
+
+  const { addToLikedVideoHandler, removeFromLikedVideoHandler, likedVideos } =
+    useLikedVideo();
+
   const {
     addVideoToWatchLaterHandler,
     removeVideoFromWatchLaterHandler,
     watchLaterVideos,
-  } = useContext(WatchLaterContext);
-
-  const { likedVideos } = useContext(LikedVideoContext);
+  } = useWatchLater();
 
   const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
 
@@ -51,27 +42,33 @@ export function Video() {
             src={`https://www.youtube.com/embed/${state.currentVideo.src}?autoplay=1`}
           />
           <div className="video-btns">
-            {likedVideos.some(
-              (video) => video._id === state.currentVideo._id
-            ) ? (
-              <span onClick={() => removeFromLikedVideoHandler(state.currentVideo)}>
+            {checkLikedVideo(state.currentVideo, likedVideos) ? (
+              <button
+                className={
+                  checkLikedVideo(state.currentVideo, likedVideos) ? " btn-fill" : ""
+                }
+                onClick={() => removeFromLikedVideoHandler(state.currentVideo)}
+              >
                 <span>
                   <ThumbsUpIcon />
                 </span>
                 Liked
-              </span>
+              </button>
             ) : (
-              <span onClick={() => addToLikedVideoHandler(state.currentVideo)}>
+              <button
+                onClick={() => addToLikedVideoHandler(state.currentVideo)}
+              >
                 <span>
                   <ThumbsUpIcon />
                 </span>
                 Like
-              </span>
+              </button>
             )}
-            {watchLaterVideos.findIndex(
-              (video) => video._id === state.currentVideo._id
-            ) !== -1 ? (
-              <span
+            {checkWatchLater(state.currentVideo, watchLaterVideos) ? (
+              <button
+                className={
+                  checkWatchLater(state.currentVideo, watchLaterVideos) ? " btn-fill" : ""
+                }
                 onClick={() =>
                   removeVideoFromWatchLaterHandler(state.currentVideo)
                 }
@@ -80,29 +77,32 @@ export function Video() {
                   <WatchLaterIcon />
                 </span>
                 Remove from watch later
-              </span>
+              </button>
             ) : (
-              <span
+              <button
                 onClick={() => addVideoToWatchLaterHandler(state.currentVideo)}
               >
                 <span>
                   <WatchLaterIcon />
                 </span>
                 Add to watch later
-              </span>
+              </button>
             )}
-            <span onClick={() => setSavePlaylistModal(true)}>
+            <button
+              onClick={() => setSavePlaylistModal(true)}
+              className={savePlaylistModal ? " btn-fill" : ""}
+            >
               <span>
                 <PlaylistIcon />
               </span>
               Add to playlist
-            </span>
+            </button>
           </div>
         </main>
         <aside className="video-aside">
           <h2 className="video-title">Must watch</h2>
           <div className="video-container">
-            {mustWatchVideos.map((item) => (
+            {mustWatchVideos(state).map((item) => (
               <li key={item._id}>
                 <VideoCard item={item} />
               </li>

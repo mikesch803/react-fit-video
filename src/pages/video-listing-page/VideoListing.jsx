@@ -1,10 +1,12 @@
 import React from "react";
-import { useContext } from "react";
 import { Aside, VideoCard } from "../../components";
-import { VideoContext } from "../../context";
+import { useVideo } from "../../context";
+import { useVideoCardOption } from "../../hooks";
 import "./VideoListing.css";
 export function VideoListing() {
-  const { state } = useContext(VideoContext);
+  const { videoCardOptionState, setVideoCardOptionState } =
+    useVideoCardOption();
+  const { state } = useVideo();
   return (
     <div className="trend-video-grid-layout">
       <Aside />
@@ -13,7 +15,11 @@ export function VideoListing() {
         <div className="video-container">
           {state.allVideos.map((item) => (
             <li key={item._id}>
-              <VideoCard item={item} />
+              <VideoCard
+                item={item}
+                videoCardOptionState={videoCardOptionState}
+                setVideoCardOptionState={setVideoCardOptionState}
+              />
             </li>
           ))}
         </div>
