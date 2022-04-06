@@ -1,5 +1,6 @@
 .liked-video-grid-layout {
     display: grid;
+    grid-template-columns: 15.6rem 1fr;
     grid-template-areas:
       "header header header"
       "aside main main";
@@ -7,8 +8,7 @@
 
 .liked-video-main {
 grid-area: main;
-margin: auto;
-max-width: 80%;
+margin: 1rem;
 }
 
 .video-container {
@@ -46,8 +46,7 @@ margin-left: 1rem;
 }
 
 .liked-video-title {
-margin: 1rem 0rem;
-
+margin-bottom: 1rem;
 }
 
 .card:hover, .card{
