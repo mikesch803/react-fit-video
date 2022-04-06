@@ -106,6 +106,29 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const guestLoginHandler = async (e) => {
+    e.preventDefault();
+      try {
+        const response = await axios.post(`/api/auth/login`, {
+          email: "adarshbalika@gmail.com",
+          password: "adarshBalika123",
+        });
+
+        if (response.status === 200) {
+          setUserState(true);
+          setToastStyles("alert alert-success");
+          setToastMsg("Login successfully");
+          setToastState(true);
+          setTimeout(() => {
+            setToastState(false);
+          }, 1500);
+          localStorage.setItem("token", response.data.encodedToken);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+  };
+
   const logoutHandler = () => {
     setHistoryVideos([]);
     setLikedVideos([]);
@@ -131,6 +154,7 @@ const AuthProvider = ({ children }) => {
         loginUserHandler,
         userState,
         logoutHandler,
+        guestLoginHandler
       }}
     >
       {children}

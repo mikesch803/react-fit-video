@@ -79,7 +79,7 @@ const {signupHandler, state, dispatch} = useAuth();
             className="form-passwordeye"
             onClick={() => dispatch({ type: "CHANGE_TYPE" })}
           >
-            {state.showPasswordIcon}
+            {state.passwordType === 'text' ?  <PassWordShowIcon/>:<PassWordNotShowIcon/>}
           </span>
         </div>
         {state.confirmPasswordErrState && (

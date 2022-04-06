@@ -5,7 +5,7 @@ import { PassWordNotShowIcon, PassWordShowIcon } from "../../icons/Icons";
 import "./Login.css";
 
 export function Login() {
-  const { loginUserHandler, state, dispatch } = useAuth();
+  const { loginUserHandler, state, dispatch, guestLoginHandler } = useAuth();
 
   return (
     <div className="grid-layout-login">
@@ -55,6 +55,9 @@ export function Login() {
         </div>
         <button className="btn btn-primary form-btn" type="submit">
           login
+        </button>
+        <button className="btn btn-outline form-btn" onClick={(e) => guestLoginHandler(e)}>
+          guest login
         </button>
         <Link to="/signup" className="btn btn-link link-account">
           create a new account
