@@ -1,34 +1,28 @@
-import { useContext } from "react";
-import {
-  HistoryContext,
-  LikedVideoContext,
-  WatchLaterContext,
-} from "../../context";
+import "./StackListContainer.css";
+import { useHistory, useLikedVideo, useWatchLater } from "../../context";
 import {
   ThumbsDownIcon,
   ThumbsUpIcon,
   WatchLaterIcon,
 } from "../../icons/Icons";
-import "./StackListContainer.css";
+import { checkLikedVideo, checkWatchLater } from "../../utils/functions";
 
 export const StackListContainer = ({ item }) => {
   const { addToLikedVideoHandler, removeFromLikedVideoHandler, likedVideos } =
-    useContext(LikedVideoContext);
+    useLikedVideo();
 
   const {
     addVideoToWatchLaterHandler,
     removeVideoFromWatchLaterHandler,
     watchLaterVideos,
-  } = useContext(WatchLaterContext);
+  } = useWatchLater();
 
-  const { historyVideos, removeVideoFromHistoryHandler } =
-    useContext(HistoryContext);
+  const { historyVideos, removeVideoFromHistoryHandler } = useHistory();
 
   return (
     <div className="stack-list-container position-stack">
       <ul>
-        {watchLaterVideos.findIndex((video) => video._id === item._id) !==
-        -1 ? (
+        {checkWatchLater(item, watchLaterVideos) ? (
           <li
             className="btn btn-link"
             onClick={() => removeVideoFromWatchLaterHandler(item)}
@@ -49,7 +43,7 @@ export const StackListContainer = ({ item }) => {
             Add to watch later
           </li>
         )}
-        {likedVideos.findIndex((video) => video._id === item._id) !== -1 ? (
+        {checkLikedVideo(item, likedVideos) ? (
           <li
             className="btn btn-link"
             onClick={() => removeFromLikedVideoHandler(item)}

@@ -1,4 +1,3 @@
-import { PassWordNotShowIcon, PassWordShowIcon } from "../icons/Icons";
 export const AuthReducer = (state, action) => {
   switch (action.type) {
     case "ADD_FIELD":
@@ -41,13 +40,11 @@ export const AuthReducer = (state, action) => {
       return state.passwordType === "text"
         ? {
             ...state,
-            passwordType: "password",
-            showPasswordIcon: <PassWordNotShowIcon />,
+            passwordType: "password"
           }
         : {
             ...state,
-            passwordType: "text",
-            showPasswordIcon: <PassWordShowIcon />,
+            passwordType: "text"
           };
 
     default:

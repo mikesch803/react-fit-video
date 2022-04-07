@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useToast } from "./toast-context";
 
 const WatchLaterContext = createContext();
@@ -79,4 +79,6 @@ const WatchLaterProvider = ({ children }) => {
   );
 };
 
-export { WatchLaterContext, WatchLaterProvider };
+const useWatchLater = () => useContext(WatchLaterContext);
+
+export { WatchLaterContext, WatchLaterProvider, useWatchLater };

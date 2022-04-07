@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useContext } from "react";
 import { videoReducer } from "../reducer/VideoReducer";
 
 const VideoContext = createContext();
@@ -65,4 +65,6 @@ const VideoProvider = ({ children }) => {
   );
 };
 
-export { VideoContext, VideoProvider };
+const useVideo = () => useContext(VideoContext);
+
+export { VideoContext, VideoProvider, useVideo };

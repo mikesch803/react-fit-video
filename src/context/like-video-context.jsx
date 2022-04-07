@@ -1,11 +1,12 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import { useToast } from "./toast-context";
 
 const LikedVideoContext = createContext();
 
 const LikedVideoProvider = ({ children }) => {
   const [likedVideos, setLikedVideos] = useState([]);
+  console.log(likedVideos)
   const {setToastMsg, setToastStyles, setToastState} = useToast();
 
   const addToLikedVideoHandler = (video) => {
@@ -27,7 +28,7 @@ const LikedVideoProvider = ({ children }) => {
         if (response.status === 201) {
           setLikedVideos(response.data.likes);
           setToastStyles("alert alert-info")
-          setToastMsg("video is added to liked videos")
+          setToastMsg("Added to liked videos")
           setToastState(true);
           setTimeout(()=>{
             setToastState(false)
@@ -52,7 +53,7 @@ const LikedVideoProvider = ({ children }) => {
         if (response.status === 200) {
           setLikedVideos(response.data.likes);
           setToastStyles("alert alert-info")
-          setToastMsg("video is removed from liked videos")
+          setToastMsg("Removed from liked videos")
           setToastState(true);
           setTimeout(()=>{
             setToastState(false)
@@ -78,4 +79,6 @@ const LikedVideoProvider = ({ children }) => {
   );
 };
 
-export { LikedVideoContext, LikedVideoProvider };
+const useLikedVideo = () => useContext(LikedVideoContext);
+
+export { LikedVideoContext, LikedVideoProvider, useLikedVideo };

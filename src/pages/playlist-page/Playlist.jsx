@@ -1,20 +1,20 @@
 import axios from "axios";
 import React from "react";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Aside, VideoCard } from "../../components";
-import { PlaylistContext } from "../../context";
-import usePlaylistModal from "../../hooks/usePlaylistModal";
+import { usePlaylist } from "../../context";
+import { usePlaylistModal } from "../../hooks";
 import "./Playlist.css";
 export function Playlist() {
   const {
     state,
-    dispatch,
+    playlistDispatch,
     getPlaylistHandler,
     removePlaylistHandler,
     addPlaylistHandler,
     removeVideoFromPlaylistHandler,
-  } = useContext(PlaylistContext);
+  } = usePlaylist();
 
   const navigate = useNavigate();
   const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
@@ -28,13 +28,13 @@ export function Playlist() {
           },
         });
         if (response.status === 200) {
-          dispatch({ type: "PLAYLISTS", payload: response.data.playlists });
+          playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
         }
       } catch (err) {
         console.error(err);
       }
     })();
-  }, [dispatch, removePlaylistHandler, removeVideoFromPlaylistHandler, state]);
+  }, [playlistDispatch, removePlaylistHandler, removeVideoFromPlaylistHandler, state]);
 
   return (
     <div className="playlist-grid-layout">
@@ -56,7 +56,7 @@ export function Playlist() {
               type="text"
               name="title"
               onChange={(e) =>
-                dispatch({
+                playlistDispatch({
                   type: "ADD_TITLE_DESCRIPTION",
                   payload: e.target,
                 })
@@ -67,7 +67,7 @@ export function Playlist() {
               type="text"
               name="description"
               onChange={(e) =>
-                dispatch({
+                playlistDispatch({
                   type: "ADD_TITLE_DESCRIPTION",
                   payload: e.target,
                 })
@@ -77,7 +77,7 @@ export function Playlist() {
               className="btn btn-primary btn-ss"
               onClick={() => {
                 addPlaylistHandler(state.field);
-                setSavePlaylistModal(false)
+                setSavePlaylistModal(false);
               }}
             >
               create
@@ -112,7 +112,7 @@ export function Playlist() {
         </ul>
         <h3 className="m-b-1">{state.currentPlaylist.title}</h3>
         <ul className="playlist-video-card">
-          {state.currentPlaylist &&
+          {state.allPlaylist && state.currentPlaylist &&
             state.currentPlaylist.videos?.map((video) => (
               <li key={video._id} className="p-relative">
                 <VideoCard item={video} />

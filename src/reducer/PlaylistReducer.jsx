@@ -32,6 +32,9 @@ export const playlistReducer = (state, action) => {
       case "DELETE_PLAYLIST":
         return { ...state, currentPlaylist: {} };
 
+      case "RESET_ALL_PLAYLIST":
+        return {...state, allPlaylist:[]}
+
       default:
         return state;
     }

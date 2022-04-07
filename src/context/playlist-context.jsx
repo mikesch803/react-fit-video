@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useContext } from "react";
 import { playlistReducer } from "../reducer/PlaylistReducer";
 import { useToast } from "./toast-context";
 
@@ -9,7 +9,7 @@ const PlaylistProvider = ({ children }) => {
 
   const {setToastMsg, setToastState, setToastStyles} = useToast();
 
-  const [state, dispatch] = useReducer(playlistReducer, {
+  const [state, playlistDispatch] = useReducer(playlistReducer, {
     allPlaylist: [],
     InputState: false,
     field: {},
@@ -36,7 +36,7 @@ const PlaylistProvider = ({ children }) => {
           }
         );
         if (response.status === 201) {
-          dispatch({ type: "PLAYLISTS", payload: response.data.playlists });
+          playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
         }
       } catch (err) {
         console.error(err);
@@ -57,8 +57,8 @@ const PlaylistProvider = ({ children }) => {
           }
         );
         if (response.status === 200) {
-          dispatch({ type: "PLAYLISTS", payload: response.data.playlists });
-          dispatch({ type: "DELETE_PLAYLIST" });
+          playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
+          playlistDispatch({ type: "DELETE_PLAYLIST" });
         }
       } catch (err) {
         console.error(err);
@@ -82,17 +82,17 @@ const PlaylistProvider = ({ children }) => {
           }
         );
         if (response.status === 201) {
-          dispatch({
+          playlistDispatch({
             type: "VIDEOS_IN_PLAYLIST",
             payload: response.data.playlist.videos,
           });
 
-          dispatch({
+          playlistDispatch({
             type: "CURRENT_PLAYLIST",
             payload: response.data.playlist,
           });
 
-          dispatch({
+          playlistDispatch({
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
@@ -122,16 +122,16 @@ const PlaylistProvider = ({ children }) => {
           }
         );
         if (response.status === 200) {
-          dispatch({
+          playlistDispatch({
             type: "VIDEOS_IN_PLAYLIST",
             payload: response.data.playlist.videos,
           });
-          dispatch({
+          playlistDispatch({
             type: "CURRENT_PLAYLIST",
             payload: response.data.playlist,
           });
 
-          dispatch({
+          playlistDispatch({
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
@@ -158,11 +158,11 @@ const PlaylistProvider = ({ children }) => {
           },
         });
         if (response.status === 200) {
-          dispatch({
+          playlistDispatch({
             type: "CURRENT_PLAYLIST",
             payload: response.data.playlist,
           });
-          dispatch({
+          playlistDispatch({
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
@@ -177,7 +177,7 @@ const PlaylistProvider = ({ children }) => {
     <PlaylistContext.Provider
       value={{
         state,
-        dispatch,
+        playlistDispatch,
         addPlaylistHandler,
         removePlaylistHandler,
         addVideoToPlaylistHandler,
@@ -190,4 +190,6 @@ const PlaylistProvider = ({ children }) => {
   );
 };
 
-export { PlaylistContext, PlaylistProvider };
+const usePlaylist = () => useContext(PlaylistContext);
+
+export { PlaylistContext, PlaylistProvider, usePlaylist };

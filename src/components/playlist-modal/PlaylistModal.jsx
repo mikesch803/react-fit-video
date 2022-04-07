@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
-import { PlaylistContext } from "../../context";
+import { usePlaylist } from "../../context";
 import "./PlaylistModal.css";
 export function PlaylistModal({ setSavePlaylistModal, video }) {
   const {
     state,
-    dispatch,
+    playlistDispatch,
     addPlaylistHandler,
     addVideoToPlaylistHandler,
     removeVideoFromPlaylistHandler,
-  } = useContext(PlaylistContext);
+  } = usePlaylist();
   return (
     <div className="video-modal-playlist">
       <p>
@@ -20,21 +19,24 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
           &times;
         </span>
       </p>
-      <ul>{state.allPlaylist.map((item) => (
-        <li key={item._id}>
-        <label>
-          <input
-            type="checkbox"
-            checked={item.videos.some((ele) => ele._id === video._id)}
-            onChange={() => {
-              item.videos.some((item) => item._id === video._id)
-                ? removeVideoFromPlaylistHandler(item._id, video)
-                : addVideoToPlaylistHandler(item._id, video);
-            }}
-          />
-          {item.title}
-        </label></li>
-      ))}</ul>
+      <ul>
+        {state.allPlaylist.map((item) => (
+          <li key={item._id}>
+            <label>
+              <input
+                type="checkbox"
+                checked={item.videos.some((ele) => ele._id === video._id)}
+                onChange={() => {
+                  item.videos.some((item) => item._id === video._id)
+                    ? removeVideoFromPlaylistHandler(item._id, video)
+                    : addVideoToPlaylistHandler(item._id, video);
+                }}
+              />
+              {item.title}
+            </label>
+          </li>
+        ))}
+      </ul>
       {state.inputState && (
         <div className="video-playlist-input">
           <label>Title</label>
@@ -42,7 +44,7 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
             type="text"
             name="title"
             onChange={(e) =>
-              dispatch({
+              playlistDispatch({
                 type: "ADD_TITLE_DESCRIPTION",
                 payload: e.target,
               })
@@ -53,7 +55,7 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
             type="text"
             name="description"
             onChange={(e) =>
-              dispatch({
+              playlistDispatch({
                 type: "ADD_TITLE_DESCRIPTION",
                 payload: e.target,
               })
@@ -73,7 +75,7 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
       ) : (
         <button
           className="btn btn-ss btn-link p-half"
-          onClick={() => dispatch({ type: "INPUT_STATE" })}
+          onClick={() => playlistDispatch({ type: "INPUT_STATE" })}
         >
           + create new playlist
         </button>

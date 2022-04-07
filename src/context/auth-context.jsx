@@ -1,11 +1,19 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer, useState, useContext } from "react";
 import axios from "axios";
-import { PassWordNotShowIcon } from "../icons/Icons";
 import { AuthReducer } from "../reducer/AuthReducer";
 import { useToast } from "./toast-context";
+import { useLikedVideo } from "./like-video-context";
+import { useHistory } from "./history-context";
+import { useWatchLater } from "./watch-later-context";
+import { usePlaylist } from "./playlist-context";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const { setHistoryVideos } = useHistory();
+  const { setLikedVideos } = useLikedVideo();
+  const { setWatchLaterVideos } = useWatchLater();
+  const { playlistDispatch } = usePlaylist();
+
   const [userState, setUserState] = useState(
     localStorage?.token ? true : false
   );
@@ -13,7 +21,6 @@ const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, {
     field: {},
     passwordType: "password",
-    showPasswordIcon: <PassWordNotShowIcon />,
     emailErrState: false,
     passwordErrState: false,
     confirmPasswordErrState: false,
@@ -99,9 +106,37 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const guestLoginHandler = async (e) => {
+    e.preventDefault();
+      try {
+        const response = await axios.post(`/api/auth/login`, {
+          email: "adarshbalika@gmail.com",
+          password: "adarshBalika123",
+        });
+
+        if (response.status === 200) {
+          setUserState(true);
+          setToastStyles("alert alert-success");
+          setToastMsg("Login successfully");
+          setToastState(true);
+          setTimeout(() => {
+            setToastState(false);
+          }, 1500);
+          localStorage.setItem("token", response.data.encodedToken);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+  };
+
   const logoutHandler = () => {
-    localStorage.clear();
+    setHistoryVideos([]);
+    setLikedVideos([]);
+    setWatchLaterVideos([]);
+    playlistDispatch({ type: "RESET_ALL_PLAYLIST" });
+    playlistDispatch({ type: "DELETE_PLAYLIST" });
     setUserState(false);
+    localStorage.clear();
     setToastStyles("alert alert-success");
     setToastMsg("Logout successfully");
     setToastState(true);
@@ -119,6 +154,7 @@ const AuthProvider = ({ children }) => {
         loginUserHandler,
         userState,
         logoutHandler,
+        guestLoginHandler
       }}
     >
       {children}
@@ -126,4 +162,6 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-export { AuthContext, AuthProvider };
+const useAuth = () => useContext(AuthContext);
+
+export { AuthContext, AuthProvider, useAuth };
