@@ -26,14 +26,21 @@ const WatchLaterProvider = ({ children }) => {
         if (response.status === 201) {
           setWatchLaterVideos(response.data.watchlater);
           setToastStyles("alert alert-info");
-          setToastMsg("Video is added to watch later");
+          setToastMsg("Added to watch later");
           setToastState(true);
           setTimeout(() => {
             setToastState(false);
           }, 1500);
         }
       } catch (err) {
-        console.error(err);
+        if (err.response.status === 500) {
+          setToastStyles("alert alert-success")
+          setToastMsg("Login first")
+          setToastState(true);
+          setTimeout(()=>{
+            setToastState(false)
+          },1500)
+        }
       }
     })();
   };
@@ -52,8 +59,8 @@ const WatchLaterProvider = ({ children }) => {
         );
         if (response.status === 200) {
           setWatchLaterVideos(response.data.watchlater);
-          setToastStyles("alert alert-info");
-          setToastMsg("video is removed from watch later");
+          setToastStyles("alert alert-danger");
+          setToastMsg("Removed from watch later");
           setToastState(true);
           setTimeout(() => {
             setToastState(false);
