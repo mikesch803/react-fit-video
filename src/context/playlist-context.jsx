@@ -39,7 +39,14 @@ const PlaylistProvider = ({ children }) => {
           playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
         }
       } catch (err) {
-        console.error(err);
+        if (err.response.status === 500) {
+          setToastStyles("alert alert-warning")
+          setToastMsg("Login first")
+          setToastState(true);
+          setTimeout(()=>{
+            setToastState(false)
+          },1500)
+        }
       }
     })();
   };
@@ -96,7 +103,7 @@ const PlaylistProvider = ({ children }) => {
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
-          setToastStyles("alert alert-info")
+          setToastStyles("alert alert-success")
           setToastMsg("Playlist updated")
           setToastState(true);
           setTimeout(()=>{
@@ -135,7 +142,7 @@ const PlaylistProvider = ({ children }) => {
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
-          setToastStyles("alert alert-info")
+          setToastStyles("alert alert-success")
           setToastMsg("playlist updated")
           setToastState(true);
           setTimeout(()=>{

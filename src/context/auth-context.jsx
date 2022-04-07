@@ -6,6 +6,7 @@ import { useLikedVideo } from "./like-video-context";
 import { useHistory } from "./history-context";
 import { useWatchLater } from "./watch-later-context";
 import { usePlaylist } from "./playlist-context";
+import { useLocation, useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -13,7 +14,8 @@ const AuthProvider = ({ children }) => {
   const { setLikedVideos } = useLikedVideo();
   const { setWatchLaterVideos } = useWatchLater();
   const { playlistDispatch } = usePlaylist();
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [userState, setUserState] = useState(
     localStorage?.token ? true : false
   );
@@ -37,6 +39,7 @@ const AuthProvider = ({ children }) => {
         const response = await axios.post(`/api/auth/signup`, state.field);
         if (response.status === 201) {
           setUserState(true);
+          navigate("/");
           setToastStyles("alert alert-success");
           setToastMsg("Sign up successfully");
           setToastState(true);
@@ -79,6 +82,7 @@ const AuthProvider = ({ children }) => {
 
         if (response.status === 200) {
           setUserState(true);
+          navigate(location?.state?.from?.pathname || "/");
           setToastStyles("alert alert-success");
           setToastMsg("Login successfully");
           setToastState(true);
@@ -87,10 +91,15 @@ const AuthProvider = ({ children }) => {
           }, 1500);
           localStorage.setItem("token", response.data.encodedToken);
         }
-
-        console.log(response);
       } catch (error) {
-        console.log(error);
+        if (error.response.status === 404) {
+          setToastState(true);
+          setToastMsg("Please sign up first");
+          setToastStyles("alert alert-warning");
+          setTimeout(() => {
+            setToastState(false);
+          }, 1500);
+        }
       }
     }
     if (state.field.email.indexOf("@") === -1) {
@@ -108,25 +117,26 @@ const AuthProvider = ({ children }) => {
 
   const guestLoginHandler = async (e) => {
     e.preventDefault();
-      try {
-        const response = await axios.post(`/api/auth/login`, {
-          email: "adarshbalika@gmail.com",
-          password: "adarshBalika123",
-        });
+    try {
+      const response = await axios.post(`/api/auth/login`, {
+        email: "adarshbalika@gmail.com",
+        password: "adarshBalika123",
+      });
 
-        if (response.status === 200) {
-          setUserState(true);
-          setToastStyles("alert alert-success");
-          setToastMsg("Login successfully");
-          setToastState(true);
-          setTimeout(() => {
-            setToastState(false);
-          }, 1500);
-          localStorage.setItem("token", response.data.encodedToken);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response.status === 200) {
+        setUserState(true);
+        navigate(location?.state?.from?.pathname || "/");
+        setToastStyles("alert alert-success");
+        setToastMsg("Login successfully");
+        setToastState(true);
+        setTimeout(() => {
+          setToastState(false);
+        }, 1500);
+        localStorage.setItem("token", response.data.encodedToken);
       }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const logoutHandler = () => {
@@ -154,7 +164,7 @@ const AuthProvider = ({ children }) => {
         loginUserHandler,
         userState,
         logoutHandler,
-        guestLoginHandler
+        guestLoginHandler,
       }}
     >
       {children}

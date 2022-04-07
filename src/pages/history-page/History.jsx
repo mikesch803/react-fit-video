@@ -20,7 +20,6 @@ export function History() {
         if (response.status === 200) {
           setHistoryVideos(response.data.history);
         }
-        console.log("getting history ", response);
       } catch (err) {
         console.error(err);
       }

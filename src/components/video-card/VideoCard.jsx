@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import "./VideoCard.css";
 import { useNavigate } from "react-router-dom";
 import { useHistory, useVideo } from "../../context";
 import { MoreOptionsIcon } from "../../icons/Icons";
 import { StackListContainer } from "../index";
-export function VideoCard({ item, setVideoCardOptionState, videoCardOptionState }) {
-  // const [videoCardOptionState, setVideoCardOptionState] = useState("");
+import { checkNotInHistroy } from "../../utils/functions";
+export function VideoCard({
+  item,
+  setVideoCardOptionState,
+  videoCardOptionState,
+}) {
   const { videoClickHandler } = useVideo();
   const { addVideoToHistoryHandler, historyVideos } = useHistory();
-  const notVideoInHistory = !historyVideos.some(
-    (video) => video._id === item._id
-  );
+
   const navigate = useNavigate();
   return (
     <div className="card card-vrt">
@@ -22,7 +24,8 @@ export function VideoCard({ item, setVideoCardOptionState, videoCardOptionState 
           onClick={() => {
             videoClickHandler(item);
             navigate(`/video/${item._id}`);
-            notVideoInHistory && addVideoToHistoryHandler(item);
+            checkNotInHistroy(historyVideos, item) &&
+              addVideoToHistoryHandler(item);
           }}
         />
       </div>
@@ -38,7 +41,14 @@ export function VideoCard({ item, setVideoCardOptionState, videoCardOptionState 
           </p>
           <small>{item.creator}</small>
         </div>
-        <div onClick={(e) => { e.stopPropagation(); setVideoCardOptionState(prev => prev === item._id ? "":item._id)}}>
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setVideoCardOptionState((prev) =>
+              prev === item._id ? "" : item._id
+            );
+          }}
+        >
           <MoreOptionsIcon />
         </div>
       </div>

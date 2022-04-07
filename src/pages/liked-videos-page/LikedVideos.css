@@ -1,58 +1,30 @@
 .liked-video-grid-layout {
-    display: grid;
-    grid-template-columns: 15.6rem 1fr;
-    grid-template-areas:
-      "header header header"
-      "aside main main";
-  }
+  display: grid;
+  grid-template-columns: 15.6rem 1fr;
+  grid-template-areas:
+    "header header header"
+    "aside main main";
+}
 
 .liked-video-main {
-grid-area: main;
-margin: 1rem;
+  grid-area: main;
+  margin: 1rem;
 }
 
 .video-container {
-display: flex;
-flex-wrap: wrap;
-gap: 2rem;
-
-}
-
-.card-vrt {
-width: 20rem;
-}
-
-.card-desc {
-display: flex;
-justify-content: center;
-align-items: center;
-}
-
-.card-img {
-padding: 0;
-object-fit: contain;
-}
-
-.card-img-container {
-height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .flex-1 {
-flex:1
+  flex: 1;
 }
 
 .m-l-1 {
-margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .liked-video-title {
-margin-bottom: 1rem;
-}
-
-.card:hover, .card{
-border: none
-}
-
-li {
-list-style: none;
+  margin-bottom: 1rem;
 }
