@@ -13,7 +13,7 @@ export function NavbarBottom() {
         <div className="navbar-bottom-icons">
         {asideData.map((link, index) => (
           <NavLink style={NavLinkStyles} to={link.to} className={NavLinkStyles?'btn btn-link':'btn'} key={index}>
-            <span className="">{link.icon}</span>
+            <span>{link.icon}</span>
           </NavLink>
         ))}
       </div>
