@@ -8,7 +8,8 @@ export function VideoListing() {
     useVideoCardOption();
   const { state } = useVideo();
   return (
-    <div className="trend-video-grid-layout">
+    <div className="grid-layout">
+    <>
       <Aside />
       <main className="trend-main">
         <h2 className="trend-title">Trending Videos</h2>
@@ -19,11 +20,12 @@ export function VideoListing() {
                 item={item}
                 videoCardOptionState={videoCardOptionState}
                 setVideoCardOptionState={setVideoCardOptionState}
-              />
+                />
             </li>
           ))}
         </div>
       </main>
+      </>
     </div>
   );
 }

@@ -1,23 +1,8 @@
-.trend-video-grid-layout {
-  display: grid;
-  grid-template-columns: 15.6rem 1fr;
-  grid-template-areas:
-    "header header header"
-    "aside main main";
-}
-
 .trend-main {
   grid-area: main;
   margin: 1rem;
 }
 
-.video-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
 .trend-title {
   margin-bottom: 1rem;
 }
-

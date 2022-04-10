@@ -25,7 +25,7 @@ export function LikedVideos() {
     })();
   }, [encodedToken, setLikedVideos]);
   return (
-    <div className="liked-video-grid-layout">
+    <div className="grid-layout">
       <Aside />
       <main className="liked-video-main">
         <h2 className="liked-video-title">Liked Videos</h2>

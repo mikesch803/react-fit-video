@@ -76,7 +76,7 @@ export function Video() {
                 <span>
                   <WatchLaterIcon />
                 </span>
-                Remove from watch later
+                watch later
               </button>
             ) : (
               <button
@@ -85,7 +85,7 @@ export function Video() {
                 <span>
                   <WatchLaterIcon />
                 </span>
-                Add to watch later
+                watch later
               </button>
             )}
             <button
@@ -95,7 +95,7 @@ export function Video() {
               <span>
                 <PlaylistIcon />
               </span>
-              Add to playlist
+              playlist
             </button>
           </div>
         </main>

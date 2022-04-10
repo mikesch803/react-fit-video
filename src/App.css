@@ -1,3 +1,5 @@
+@import './common.css';
+
 .flex-1 {
   flex: 1;
 }
@@ -14,6 +16,10 @@
   margin-left: auto;
 }
 
+.m-r-0 {
+  margin-right: 0;
+}
+
 li {
   list-style: none;
 }
@@ -22,8 +28,6 @@ li {
   padding: 0;
 }
 
-
 .p-relative {
-    position: relative;
-  }
-  
+  position: relative;
+}

@@ -6,8 +6,7 @@ import { useEffect } from "react";
 import { useHistory } from "../../context";
 
 export function History() {
-  const { historyVideos, setHistoryVideos, clearHistoryHandler } =
-    useHistory();
+  const { historyVideos, setHistoryVideos, clearHistoryHandler } = useHistory();
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
     (async () => {
@@ -26,7 +25,7 @@ export function History() {
     })();
   }, [encodedToken, setHistoryVideos]);
   return (
-    <div className="history-video-grid-layout">
+    <div className="grid-layout">
       <Aside />
       <main className="history-video-main">
         <h2 className="history-video-title">

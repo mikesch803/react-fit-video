@@ -26,7 +26,7 @@ export function WatchLater() {
     })();
   }, [encodedToken, setWatchLaterVideos]);
   return (
-    <div className="watch-later-video-grid-layout">
+    <div className="grid-layout">
       <Aside />
       <main className="watch-later-video-main">
         <h2 className="watch-later-video-title">Watch Later Videos</h2>

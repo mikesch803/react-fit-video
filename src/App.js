@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Header, Toast } from "./components";
+import { Header, NavbarBottom, Toast } from "./components";
 import Mockman from "mockman-js";
 import {
   Auth,
@@ -8,7 +8,6 @@ import {
   Home,
   LikedVideos,
   Login,
-  NotAuth,
   NotFound,
   Playlist,
   Signup,
@@ -30,8 +29,6 @@ function App() {
         <Route path={`/video/:videoId`} element={<Video />} />
         <Route path={`/category:categoryId`} element={<Home />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
 
         <Route element={<Auth />}>
           <Route path="/history" element={<History />} />
@@ -41,7 +38,10 @@ function App() {
           <Route path="/likedvideos" element={<LikedVideos />} />
         </Route>
         <Route path="/mock" element={<Mockman />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
+      <NavbarBottom />
     </div>
   );
 }

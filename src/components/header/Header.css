@@ -1,34 +1,23 @@
+.navbar {
+  grid-area: header;
+  background-color: var(--COLOR-FT);
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.avatar-txt {
+  padding: 1.5rem;
+}
 
-  .avatar-txt {
-    padding: 1.5rem;
-  }
-  
-  .navbar-title {
-    color: var(--COLOR-PRIMARY);
-    margin-left: 2rem;
-  } 
+.navbar-title {
+  color: var(--COLOR-PRIMARY);
+  margin-left: 2rem;
+}
 
-  .header {
-    grid-area: header;
-  }
-
-  .navbar {
-      background-color: var(--COLOR-FT);
-      justify-content: space-between;
-  }
-  
-  .navbar-login,
-  .navbar-shop,
-  .navbar-title a {
-    color: var(--COLOR-PRIMARY);
-    background: none;
-  }
-  
-  /* .bg-num {
-    top: -0.07rem;
-    background-color: var(--COLOR-ERROR);
-  }
-  
-  .bg-icon {
-    color: var(--COLOR-FT);
-  } */
+.navbar-login,
+.navbar-shop,
+.navbar-title a {
+  color: var(--COLOR-PRIMARY);
+  background: none;
+}

@@ -22,34 +22,36 @@ export function Home() {
     useVideoCardOption();
 
   return (
-    <div className="home-grid-layout">
+    <div className="grid-layout ">
       <Aside />
       <div className="home-main">
-        <button
-          name="all"
-          className={`btn btn-outline btn-round ${
-            activeBtn === "all" ? "btn-active" : ""
-          }`}
-          onClick={(e) => {
-            allVideosHandler(e);
-          }}
-        >
-          All
-        </button>
-        {state.categoryVideos.map((item) => (
+        <div className="categories-btns">
           <button
-            name={item.categoryName}
-            key={item._id}
+            name="all"
             className={`btn btn-outline btn-round ${
-              activeBtn === item.categoryName ? "btn-active" : ""
+              activeBtn === "all" ? "btn-active" : ""
             }`}
             onClick={(e) => {
-              categoryHandler(item, e);
+              allVideosHandler(e);
             }}
           >
-            {item.categoryName}
+            All
           </button>
-        ))}
+          {state.categoryVideos.map((item) => (
+            <button
+              name={item.categoryName}
+              key={item._id}
+              className={`btn btn-outline btn-round ${
+                activeBtn === item.categoryName ? "btn-active" : ""
+              }`}
+              onClick={(e) => {
+                categoryHandler(item, e);
+              }}
+            >
+              {item.categoryName}
+            </button>
+          ))}
+        </div>
         <div className="video-container">
           {categoryVideos.map((item) => (
             <li key={item._id}>
