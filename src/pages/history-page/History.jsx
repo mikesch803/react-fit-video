@@ -4,8 +4,11 @@ import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
 import { useHistory } from "../../context";
+import { useVideoCardOption } from "../../hooks";
 
 export function History() {
+  const { videoCardOptionState, setVideoCardOptionState } =
+    useVideoCardOption();
   const { historyVideos, setHistoryVideos, clearHistoryHandler } = useHistory();
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
@@ -40,7 +43,7 @@ export function History() {
         <div className="video-container">
           {historyVideos.map((item) => (
             <li key={item._id} className="history-list">
-              <VideoCard item={item} />
+              <VideoCard item={item} videoCardOptionState={videoCardOptionState} setVideoCardOptionState={setVideoCardOptionState}/>
             </li>
           ))}
         </div>

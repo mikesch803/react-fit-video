@@ -4,8 +4,11 @@ import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLikedVideo } from "../../context";
+import { useVideoCardOption } from "../../hooks";
 
 export function LikedVideos() {
+  const { videoCardOptionState, setVideoCardOptionState } =
+    useVideoCardOption();
   const { likedVideos, setLikedVideos } = useLikedVideo();
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
@@ -32,7 +35,8 @@ export function LikedVideos() {
         <div className="video-container">
           {likedVideos.map((item) => (
             <li key={item._id}>
-              <VideoCard item={item} />
+              <VideoCard item={item} videoCardOptionState={videoCardOptionState}
+                setVideoCardOptionState={setVideoCardOptionState}/>
             </li>
           ))}
         </div>
