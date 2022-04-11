@@ -3,17 +3,16 @@
   min-height: 100vh;
   grid-template-areas:
     "header header header"
-    "... signup ...";
+    "... main ...";
 }
 
 .form-signup {
-  grid-area: signup;
+  grid-area: main;
   padding: 1rem;
   justify-content: center;
   background-color: var(--COLOR-FT);
   gap: 0.5rem;
   height: fit-content;
-
 }
 
 .signup-checkbox {
@@ -37,18 +36,18 @@
 }
 
 .form-passwordeye {
-position: absolute;
-right: 10px;
-display: flex;
+  position: absolute;
+  right: 10px;
+  display: flex;
 }
 
 .parent-div {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-position: relative;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  position: relative;
 }
 
 .flex-1 {
-    flex: 1;
+  flex: 1;
 }

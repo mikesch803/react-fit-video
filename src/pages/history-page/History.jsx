@@ -4,10 +4,12 @@ import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
 import { useHistory } from "../../context";
+import { useVideoCardOption } from "../../hooks";
 
 export function History() {
-  const { historyVideos, setHistoryVideos, clearHistoryHandler } =
-    useHistory();
+  const { videoCardOptionState, setVideoCardOptionState } =
+    useVideoCardOption();
+  const { historyVideos, setHistoryVideos, clearHistoryHandler } = useHistory();
   const encodedToken = localStorage.getItem("token");
   useEffect(() => {
     (async () => {
@@ -26,7 +28,7 @@ export function History() {
     })();
   }, [encodedToken, setHistoryVideos]);
   return (
-    <div className="history-video-grid-layout">
+    <div className="grid-layout">
       <Aside />
       <main className="history-video-main">
         <h2 className="history-video-title">
@@ -41,7 +43,7 @@ export function History() {
         <div className="video-container">
           {historyVideos.map((item) => (
             <li key={item._id} className="history-list">
-              <VideoCard item={item} />
+              <VideoCard item={item} videoCardOptionState={videoCardOptionState} setVideoCardOptionState={setVideoCardOptionState}/>
             </li>
           ))}
         </div>

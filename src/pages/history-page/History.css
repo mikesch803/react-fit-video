@@ -1,29 +1,13 @@
-.history-video-grid-layout {
-  display: grid;
-  grid-template-columns: 15.6rem 1fr;
-  grid-template-areas:
-    "header header header"
-    "aside main main";
-}
-
 .history-video-main {
   grid-area: main;
   margin: 1rem;
 }
 
-.video-container,
 .history-video-title {
   display: flex;
-}
-
-.video-container {
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.history-video-title {
   margin-bottom: 1rem;
 }
+
 
 .history-list {
   position: relative;

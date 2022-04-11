@@ -1,0 +1,16 @@
+.navbar-bottom {
+  background-color: var(--COLOR-FT);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+  padding: 0.5rem;
+}
+
+.navbar-bottom-icons,
+.navbar-bottom-icons > a {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}

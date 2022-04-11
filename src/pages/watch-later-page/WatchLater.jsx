@@ -4,8 +4,11 @@ import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
 import { useWatchLater } from "../../context";
+import { useVideoCardOption } from "../../hooks";
 
 export function WatchLater() {
+  const { videoCardOptionState, setVideoCardOptionState } =
+    useVideoCardOption();
   const { watchLaterVideos, setWatchLaterVideos } =
     useWatchLater();
   const encodedToken = localStorage.getItem("token");
@@ -26,14 +29,14 @@ export function WatchLater() {
     })();
   }, [encodedToken, setWatchLaterVideos]);
   return (
-    <div className="watch-later-video-grid-layout">
+    <div className="grid-layout">
       <Aside />
       <main className="watch-later-video-main">
         <h2 className="watch-later-video-title">Watch Later Videos</h2>
         <div className="video-container">
           {watchLaterVideos.map((item) => (
             <li key={item._id}>
-              <VideoCard item={item} />
+              <VideoCard item={item} videoCardOptionState={videoCardOptionState} setVideoCardOptionState={setVideoCardOptionState}/>
             </li>
           ))}
         </div>

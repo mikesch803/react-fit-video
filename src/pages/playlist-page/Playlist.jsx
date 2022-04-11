@@ -37,7 +37,7 @@ export function Playlist() {
   }, [playlistDispatch, removePlaylistHandler, removeVideoFromPlaylistHandler, state]);
 
   return (
-    <div className="playlist-grid-layout">
+    <div className="grid-layout">
       <Aside />
       <main className="playlist-main">
         <h2 className="playlist-title">
@@ -45,7 +45,7 @@ export function Playlist() {
           <span
             className="btn btn-primary m-l-auto"
             onClick={() => setSavePlaylistModal(true)}
-          >
+            >
             create a playlist
           </span>
         </h2>
@@ -61,7 +61,7 @@ export function Playlist() {
                   payload: e.target,
                 })
               }
-            />
+              />
             <label>Description</label>{" "}
             <input
               type="text"
@@ -72,7 +72,7 @@ export function Playlist() {
                   payload: e.target,
                 })
               }
-            />
+              />
             <button
               className="btn btn-primary btn-ss"
               onClick={() => {
@@ -92,7 +92,7 @@ export function Playlist() {
                   getPlaylistHandler(item);
                   navigate(`/playlist/${item._id}`);
                 }}
-              >
+                >
                 {item.title}
               </h3>
               <p>
@@ -103,7 +103,7 @@ export function Playlist() {
                     removePlaylistHandler(item);
                     navigate("/playlist");
                   }}
-                >
+                  >
                   &times;
                 </span>
               </p>
@@ -122,15 +122,16 @@ export function Playlist() {
                     removeVideoFromPlaylistHandler(
                       state.currentPlaylist._id,
                       video
-                    )
-                  }
-                >
+                      )
+                    }
+                    >
                   remove
                 </span>
               </li>
             ))}
         </ul>
       </main>
+      
     </div>
   );
 }
