@@ -10,6 +10,7 @@ import {
   Login,
   NotFound,
   Playlist,
+  Profile,
   Signup,
   Video,
   VideoListing,
@@ -36,6 +37,7 @@ function App() {
           <Route path="/playlist" element={<Playlist />} />
           <Route path={`/playlist/:playlistId`} element={<Playlist />} />
           <Route path="/likedvideos" element={<LikedVideos />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/mock" element={<Mockman />} />
         <Route path="/signup" element={<Signup />} />
