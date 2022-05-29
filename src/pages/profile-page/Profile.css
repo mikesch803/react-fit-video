@@ -1,0 +1,27 @@
+.profile-container {
+    grid-area: main;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-box {
+    border: 1px solid var(--COLOR-OFFLINE);
+    height: fit-content;
+    width: fit-content;
+    padding: 1rem;
+
+}
+
+.profile-container h2 {
+    border-bottom: 1px solid;
+}
+
+.profile-container h3 {
+    margin: 1rem 0;
+}
+
+.btn-logout {
+    background-color: red;
+    color: var(--COLOR-FT);
+}
