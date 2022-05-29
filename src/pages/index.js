@@ -9,3 +9,4 @@ export { WatchLater } from "./watch-later-page/WatchLater";
 export { Playlist } from "./playlist-page/Playlist";
 export { LikedVideos } from "./liked-videos-page/LikedVideos";
 export {NotFound} from "./404/NotFound";
+export {Profile} from './profile-page/Profile';

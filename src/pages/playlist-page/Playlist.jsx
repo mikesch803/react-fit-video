@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Aside, VideoCard } from "../../components";
 import { usePlaylist } from "../../context";
-import { usePlaylistModal } from "../../hooks";
+import { usePlaylistModal, useTitle } from "../../hooks";
 import "./Playlist.css";
 export function Playlist() {
+  useTitle("Playlist")
   const {
     state,
     playlistDispatch,

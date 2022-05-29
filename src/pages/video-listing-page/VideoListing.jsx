@@ -1,12 +1,13 @@
 import React from "react";
 import { Aside, VideoCard } from "../../components";
 import { useVideo } from "../../context";
-import { useVideoCardOption } from "../../hooks";
+import { useTitle, useVideoCardOption } from "../../hooks";
 import "./VideoListing.css";
 export function VideoListing() {
   const { videoCardOptionState, setVideoCardOptionState } =
     useVideoCardOption();
   const { state } = useVideo();
+  useTitle("VideoListing")
   return (
     <div className="grid-layout">
     <>

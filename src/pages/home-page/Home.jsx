@@ -2,9 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { Aside, VideoCard } from "../../components";
 import { useVideo } from "../../context";
-import { useCategory, useVideoCardOption } from "../../hooks";
+import { useCategory, useTitle, useVideoCardOption } from "../../hooks";
 import "./Home.css";
 export function Home() {
+  useTitle("Homes");
   const {
     categoryHandler,
     setCateogoryVideos,

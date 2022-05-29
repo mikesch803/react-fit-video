@@ -4,9 +4,10 @@ import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLikedVideo } from "../../context";
-import { useVideoCardOption } from "../../hooks";
+import { useTitle, useVideoCardOption } from "../../hooks";
 
 export function LikedVideos() {
+  useTitle("LikedVideo")
   const { videoCardOptionState, setVideoCardOptionState } =
     useVideoCardOption();
   const { likedVideos, setLikedVideos } = useLikedVideo();

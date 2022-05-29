@@ -1,17 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context";
+import { useTitle, useValidation } from "../../hooks";
 import { PassWordNotShowIcon, PassWordShowIcon } from "../../icons/Icons";
 import "./Signup.css";
 
 export function Signup() {
-const {signupHandler, state, dispatch} = useAuth();
-  
+  const { signupHandler, state, dispatch } = useAuth();
+  const { errMsg, formValidation } = useValidation();
+  useTitle("Signup");
   return (
     <div className="grid-layout-signup">
       <form
         className="form form-signup"
         onSubmit={(e) => {
+          formValidation(
+            state.field.email,
+            state.field.password,
+            state.field.confirmPassword
+          );
           signupHandler(e);
         }}
       >
@@ -42,9 +49,7 @@ const {signupHandler, state, dispatch} = useAuth();
           onChange={(e) => dispatch({ type: "ADD_FIELD", payload: e.target })}
           required
         />
-        {state.emailErrState && (
-          <small className="form-error">invalid mail</small>
-        )}
+        <small className="form-error">{errMsg.email}</small>
         <div className="parent-div">
           <input
             type={state.passwordType}
@@ -58,14 +63,14 @@ const {signupHandler, state, dispatch} = useAuth();
             className="form-passwordeye"
             onClick={() => dispatch({ type: "CHANGE_TYPE" })}
           >
-            {state.passwordType === 'text' ?  <PassWordShowIcon/>:<PassWordNotShowIcon/>}
+            {state.passwordType === "text" ? (
+              <PassWordShowIcon />
+            ) : (
+              <PassWordNotShowIcon />
+            )}
           </span>
         </div>
-        {state.passwordErrState && (
-          <small className="form-error">
-            Password should be more than 8 character
-          </small>
-        )}
+        <small className="form-error">{errMsg.password}</small>
         <div className="parent-div">
           <input
             type={state.passwordType}
@@ -79,12 +84,14 @@ const {signupHandler, state, dispatch} = useAuth();
             className="form-passwordeye"
             onClick={() => dispatch({ type: "CHANGE_TYPE" })}
           >
-            {state.passwordType === 'text' ?  <PassWordShowIcon/>:<PassWordNotShowIcon/>}
+            {state.passwordType === "text" ? (
+              <PassWordShowIcon />
+            ) : (
+              <PassWordNotShowIcon />
+            )}
           </span>
         </div>
-        {state.confirmPasswordErrState && (
-          <small className="form-error">Password did not matched</small>
-        )}
+        <small className="form-error">{errMsg.confirmPassword}</small>
         <div className="form-checkbox signup-checkbox">
           <label>
             <input type="checkbox" required /> I accepted all terms and
