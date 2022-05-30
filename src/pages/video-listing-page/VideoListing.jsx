@@ -2,6 +2,7 @@ import React from "react";
 import { Aside, VideoCard } from "../../components";
 import { useVideo } from "../../context";
 import { useTitle, useVideoCardOption } from "../../hooks";
+import { filterVideos } from "../../utils/functions/filterVideos";
 import "./VideoListing.css";
 export function VideoListing() {
   const { videoCardOptionState, setVideoCardOptionState } =
@@ -15,7 +16,7 @@ export function VideoListing() {
       <main className="trend-main">
         <h2 className="trend-title">Trending Videos</h2>
         <div className="video-container">
-          {state.allVideos.map((item) => (
+          {filterVideos(state).map((item) => (
             <li key={item._id}>
               <VideoCard
                 item={item}
