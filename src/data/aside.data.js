@@ -12,5 +12,5 @@ export  const asideData = [
     { to: "/history", icon: <HistoryIcon />, text: "history" },
     { to: "/watchlater", icon: <WatchLaterIcon />, text: "watch later" },
     { to: "/likedvideos", icon: <LikedIcon />, text: "liked videos" },
-    { to: "/playlist", icon: <PlaylistIcon />, text: "playlist" },
+    { to: "/playlist", icon: <PlaylistIcon />, text: "playlist" }
   ];

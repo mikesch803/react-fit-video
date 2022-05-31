@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context";
+import { useValidation } from "../../hooks";
 import { PassWordNotShowIcon, PassWordShowIcon } from "../../icons/Icons";
 import "./Login.css";
 
 export function Login() {
   const { loginUserHandler, state, dispatch, guestLoginHandler } = useAuth();
-
+  const { formValidation, errMsg} = useValidation();
   return (
     <div className="grid-layout-login">
-      <form className="form form-login" onSubmit={(e) => loginUserHandler(e)}>
+      <form className="form form-login" onSubmit={(e) => { formValidation(state.field.email, state.field.password); loginUserHandler(e)}}>
         <h2 className="title-form">Login</h2>
         <input
           required
@@ -19,11 +20,9 @@ export function Login() {
           name="email"
           onChange={(e) => dispatch({ type: "ADD_FIELD", payload: e.target })}
         />
-        {state.emailErrState && (
           <small className="form-error">
-            email invalid
+            {errMsg.email}
           </small>
-        )}
         <div className="parent-div">
           <input
             required
@@ -40,11 +39,9 @@ export function Login() {
             {state.passwordType === 'text' ? <PassWordShowIcon/>:<PassWordNotShowIcon/>}
           </span>
         </div>
-        {state.passwordErrState && (
-          <small className="form-error">
-            Password should be more than 8 character
+        <small className="form-error">
+            {errMsg.password}
           </small>
-        )}
         <div className="form-checkbox">
           <label>
             <input type="checkbox" /> Remember me

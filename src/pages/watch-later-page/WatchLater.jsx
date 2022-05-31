@@ -4,9 +4,10 @@ import { Aside, VideoCard } from "../../components";
 import axios from "axios";
 import { useEffect } from "react";
 import { useWatchLater } from "../../context";
-import { useVideoCardOption } from "../../hooks";
+import { useTitle, useVideoCardOption } from "../../hooks";
 
 export function WatchLater() {
+  useTitle("Watch Later")
   const { videoCardOptionState, setVideoCardOptionState } =
     useVideoCardOption();
   const { watchLaterVideos, setWatchLaterVideos } =

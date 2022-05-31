@@ -8,22 +8,22 @@ import {
   checkLikedVideo,
   checkWatchLater,
 } from "../../utils/functions";
-import { usePlaylistModal } from "../../hooks";
-
+import { usePlaylistModal, useTitle } from "../../hooks";
 export function Video() {
   const { state } = useVideo();
-
+  
   const { addToLikedVideoHandler, removeFromLikedVideoHandler, likedVideos } =
-    useLikedVideo();
-
+  useLikedVideo();
+  
   const {
     addVideoToWatchLaterHandler,
     removeVideoFromWatchLaterHandler,
     watchLaterVideos,
   } = useWatchLater();
-
+  
   const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
-
+  
+  useTitle("Video")
   return (
     <>
       <div

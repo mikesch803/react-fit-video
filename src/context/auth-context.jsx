@@ -8,7 +8,6 @@ import { useWatchLater } from "./watch-later-context";
 import { usePlaylist } from "./playlist-context";
 import { useLocation, useNavigate } from "react-router-dom";
 const AuthContext = createContext();
-
 const AuthProvider = ({ children }) => {
   const { setHistoryVideos } = useHistory();
   const { setLikedVideos } = useLikedVideo();
@@ -19,6 +18,7 @@ const AuthProvider = ({ children }) => {
   const [userState, setUserState] = useState(
     localStorage?.token ? true : false
   );
+  const user = JSON.parse(localStorage.getItem("user"));
   const { setToastMsg, setToastStyles, setToastState } = useToast();
   const [state, dispatch] = useReducer(AuthReducer, {
     field: {},
@@ -38,6 +38,11 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await axios.post(`/api/auth/signup`, state.field);
         if (response.status === 201) {
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem(
+            "user",
+            JSON.stringify(response.data.createdUser)
+          );
           setUserState(true);
           navigate("/");
           setToastStyles("alert alert-success");
@@ -46,30 +51,8 @@ const AuthProvider = ({ children }) => {
           setTimeout(() => {
             setToastState(false);
           }, 1500);
-          localStorage.setItem("token", response.data.encodedToken);
         }
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    if (state.field.email.indexOf("@") === -1) {
-      dispatch({ type: "EMAIL_ERR" });
-    } else {
-      dispatch({ type: "EMAIL_ERR" });
-    }
-
-    if (state.field.password.length < 8) {
-      dispatch({ type: "PASSWORD_ERR" });
-    } else {
-      dispatch({ type: "PASSWORD_ERR" });
-    }
-
-    if (state.field.password !== state.field.confirmPassword) {
-      dispatch({ type: "CONFIRM_PASSWORD_ERR" });
-    } else {
-      dispatch({ type: "CONFIRM_PASSWORD_ERR" });
+      } catch (error) {}
     }
   };
 
@@ -81,6 +64,8 @@ const AuthProvider = ({ children }) => {
         const response = await axios.post(`/api/auth/login`, state.field);
 
         if (response.status === 200) {
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem("user", JSON.stringify(response.data.foundUser));
           setUserState(true);
           navigate(location?.state?.from?.pathname || "/");
           setToastStyles("alert alert-success");
@@ -89,7 +74,6 @@ const AuthProvider = ({ children }) => {
           setTimeout(() => {
             setToastState(false);
           }, 1500);
-          localStorage.setItem("token", response.data.encodedToken);
         }
       } catch (error) {
         if (error.response.status === 404) {
@@ -102,40 +86,30 @@ const AuthProvider = ({ children }) => {
         }
       }
     }
-    if (state.field.email.indexOf("@") === -1) {
-      dispatch({ type: "EMAIL_ERR" });
-    } else {
-      dispatch({ type: "EMAIL_ERR" });
-    }
-
-    if (state.field.password.length < 8) {
-      dispatch({ type: "PASSWORD_ERR" });
-    } else {
-      dispatch({ type: "PASSWORD_ERR" });
-    }
   };
+
 
   const guestLoginHandler = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(`/api/auth/login`, {
-        email: "adarshbalika@gmail.com",
-        password: "adarshBalika123",
+        email: "mahendrachauhan@gmail.com",
+        password: "mahendra123",
       });
 
       if (response.status === 200) {
+        localStorage.setItem("token", response.data.encodedToken);
+        localStorage.setItem("user", JSON.stringify(response.data.foundUser));
         setUserState(true);
-        navigate(location?.state?.from?.pathname || "/");
-        setToastStyles("alert alert-success");
-        setToastMsg("Login successfully");
+        navigate(location?.state?.from?.pathname || '/');
         setToastState(true);
+        setToastMsg("Login sucessfully");
+        setToastStyles("alert alert-success");
         setTimeout(() => {
           setToastState(false);
         }, 1500);
-        localStorage.setItem("token", response.data.encodedToken);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -163,6 +137,7 @@ const AuthProvider = ({ children }) => {
         signupHandler,
         loginUserHandler,
         userState,
+        user,
         logoutHandler,
         guestLoginHandler,
       }}

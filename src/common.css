@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: 15rem 1fr;
   grid-template-areas:
-    "header header header"
     "aside main main";
+  margin-top: 4rem;
 }
 
 .video-container {
@@ -49,7 +49,6 @@
 
   .grid-layout {
     grid-template-areas:
-      "header header header"
       "main main main";
   }
   .navbar-bottom {
