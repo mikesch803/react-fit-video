@@ -3,7 +3,6 @@
   grid-template-columns: 15rem 1fr;
   grid-template-areas:
     "aside main main";
-  margin-top: 4rem;
 }
 
 .video-container {

@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/trend" element={<VideoListing />} />
         <Route path="/" element={<Home />} />
-        <Route path={`/video/:videoId`} element={<Video />} />
+        <Route path={`/video/:VideoId`} element={<Video />} />
         <Route path={`/category:categoryId`} element={<Home />} />
         <Route path="*" element={<NotFound />} />
 

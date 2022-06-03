@@ -1,6 +1,6 @@
-export const mustWatchVideos = (state) => {
-  const cateoryVideos = state.allVideos.filter(
-    (item) => item.categoryName === state.currentVideo.categoryName
+export const mustWatchVideos = (allVideos, currentVideo) => {
+  const cateoryVideos = allVideos.filter(
+    (item) => item.categoryName === currentVideo.categoryName
   );
- return cateoryVideos.filter((item) => item._id !== state.currentVideo._id);
+ return cateoryVideos.filter((item) => item._id !== currentVideo._id);
 };

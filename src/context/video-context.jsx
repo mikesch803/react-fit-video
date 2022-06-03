@@ -1,13 +1,11 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { videoReducer } from "../reducer/VideoReducer";
 
 const VideoContext = createContext();
 
 const VideoProvider = ({ children }) => {
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -39,39 +37,17 @@ const VideoProvider = ({ children }) => {
     })();
   }, []);
 
-  // const searchVideoHandler = (search) => {
-  //   navigate('/trend');
-  //   allVideos.filter(item => item.title.toLowerCase().match(search.toLowerCase()))
-  // }
-
-  const videoClickHandler = (item) => {
-    (async () => {
-      try {
-        const response = await axios.get(`/api/video/${item._id}`);
-
-        if (response.status === 200) {
-          dispatch({
-            type: "CURRENT_VIDEO",
-            payload: response.data.video,
-          });
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  };
 
   const [state, dispatch] = useReducer(videoReducer, {
     allVideos: [],
     categoryVideos: [],
-    currentVideo: {},
     searchVideos:null
   });
 
   
 
   return (
-    <VideoContext.Provider value={{ state, dispatch, videoClickHandler }}>
+    <VideoContext.Provider value={{ state, dispatch }}>
       {children}
     </VideoContext.Provider>
   );

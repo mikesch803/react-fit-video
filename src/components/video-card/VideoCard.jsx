@@ -10,7 +10,6 @@ export function VideoCard({
   setVideoCardOptionState,
   videoCardOptionState,
 }) {
-  const { videoClickHandler } = useVideo();
   const { addVideoToHistoryHandler, historyVideos } = useHistory();
 
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ export function VideoCard({
           src={item.thumbnail}
           alt={item.alt}
           onClick={() => {
-            videoClickHandler(item);
             navigate(`/video/${item._id}`);
             checkNotInHistroy(historyVideos, item) &&
               addVideoToHistoryHandler(item);

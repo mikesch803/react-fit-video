@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useVideo } from "../../context";
 import { SearchIcon, UserIcon } from "../../icons/Icons";
 import "./Header.css";
 export function Header() {
   const { dispatch } = useVideo();
+  const navigate = useNavigate();
   const searchVideoHandler = (e) => {
+     navigate('/trend')
     dispatch({ type: "SEARCH_VIDEO", payload: e.target.value })
   };
 
