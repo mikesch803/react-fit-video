@@ -13,19 +13,15 @@ import {
   Profile,
   Signup,
   Video,
-  VideoListing,
   WatchLater,
 } from "./pages";
-import { useToast } from "./context";
 
 function App() {
-  const { toastState } = useToast();
   return (
     <div className="App">
       <Header />
-      {toastState && <Toast />}
+      <Toast/>
       <Routes>
-        <Route path="/trend" element={<VideoListing />} />
         <Route path="/" element={<Home />} />
         <Route path={`/video/:videoId`} element={<Video />} />
         <Route path={`/category:categoryId`} element={<Home />} />

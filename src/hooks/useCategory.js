@@ -7,14 +7,13 @@ export function useCategory() {
   const [activeBtn, setActiveBtn] = useState("all");
   const categoryHandler = (item, e) => {
     let sortVideos = [...state.allVideos];
-    setCateogoryVideos(
-      sortVideos.filter((video) => video.categoryName === item.categoryName)
-    );
-    setActiveBtn(e.target.name);
-  };
-
-  const allVideosHandler = (e) => {
-    setCateogoryVideos(state.allVideos);
+    if (item.categoryName === "all") {
+      setCateogoryVideos(sortVideos);
+    } else {
+      setCateogoryVideos(
+        sortVideos.filter((video) => video.categoryName === item.categoryName)
+      );
+    }
     setActiveBtn(e.target.name);
   };
 
@@ -22,7 +21,6 @@ export function useCategory() {
     categoryHandler,
     categoryVideos,
     setCateogoryVideos,
-    allVideosHandler,
     activeBtn,
   };
 }

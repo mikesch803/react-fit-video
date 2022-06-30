@@ -1,20 +1,28 @@
+import { useEffect } from "react";
 import { usePlaylist } from "../../context";
 import "./PlaylistModal.css";
-export function PlaylistModal({ setSavePlaylistModal, video }) {
+export function PlaylistModal({ setPlaylistModal, video }) {
   const {
     state,
     playlistDispatch,
     addPlaylistHandler,
     addVideoToPlaylistHandler,
     removeVideoFromPlaylistHandler,
+    getAllPlaylist,
+    getPlaylistHandler
   } = usePlaylist();
+ 
+  useEffect(()=>{
+    getAllPlaylist();
+  },[state])
   return (
-    <div className="video-modal-playlist">
+    <div className="modal-position" onClick={()=>setPlaylistModal(false)}>
+    <div className="video-modal-playlist" onClick={e=> e.stopPropagation()}>
       <p>
         Save to playlist
         <span
           className="video-modal-close"
-          onClick={() => setSavePlaylistModal(false)}
+          onClick={() => setPlaylistModal(false)}
         >
           &times;
         </span>
@@ -80,6 +88,6 @@ export function PlaylistModal({ setSavePlaylistModal, video }) {
           + create new playlist
         </button>
       )}
-    </div>
+    </div></div>
   );
 }

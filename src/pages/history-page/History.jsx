@@ -31,13 +31,14 @@ export function History() {
   return (
     <div className="grid-layout">
       <Aside />
+      {historyVideos.length === 0 ? <div className="center-text ft-grey ft-w-900">Please watch some videos...</div> :
       <main className="history-video-main">
         <h2 className="history-video-title">
           History Videos
           <span
             className="btn btn-ss btn-outline m-l-auto"
             onClick={clearHistoryHandler}
-          >
+            >
             clear
           </span>
         </h2>
@@ -48,11 +49,12 @@ export function History() {
                 item={item}
                 videoCardOptionState={videoCardOptionState}
                 setVideoCardOptionState={setVideoCardOptionState}
-              />
+                />
             </li>
           ))}
         </div>
       </main>
+  }
     </div>
   );
 }

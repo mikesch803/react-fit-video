@@ -1,11 +1,16 @@
 import "./StackListContainer.css";
-import { useHistory, useLikedVideo, useWatchLater } from "../../context";
+import {
+  useHistory,
+  useLikedVideo,
+  useWatchLater,
+} from "../../context";
 import {
   ThumbsDownIcon,
   ThumbsUpIcon,
   WatchLaterIcon,
 } from "../../icons/Icons";
 import { checkLikedVideo, checkWatchLater } from "../../utils/functions";
+import { v4 as uuid } from "uuid";
 
 export const StackListContainer = ({ item }) => {
   const { addToLikedVideoHandler, removeFromLikedVideoHandler, likedVideos } =
@@ -18,12 +23,11 @@ export const StackListContainer = ({ item }) => {
   } = useWatchLater();
 
   const { historyVideos, removeVideoFromHistoryHandler } = useHistory();
-
   return (
     <div className="stack-list-container position-stack">
       <ul>
         {checkWatchLater(item, watchLaterVideos) ? (
-          <li
+          <li key={uuid()}
             className="btn btn-link"
             onClick={() => removeVideoFromWatchLaterHandler(item)}
           >
@@ -33,7 +37,7 @@ export const StackListContainer = ({ item }) => {
             Remove from watch later
           </li>
         ) : (
-          <li
+          <li key={uuid()}
             className="btn btn-link"
             onClick={() => addVideoToWatchLaterHandler(item)}
           >
@@ -44,7 +48,7 @@ export const StackListContainer = ({ item }) => {
           </li>
         )}
         {checkLikedVideo(item, likedVideos) ? (
-          <li
+          <li key={uuid()}
             className="btn btn-link"
             onClick={() => removeFromLikedVideoHandler(item)}
           >
@@ -53,8 +57,8 @@ export const StackListContainer = ({ item }) => {
             </span>
             dislike video
           </li>
-        ) : (
-          <li
+        ) : ( 
+          <li key={uuid()}
             className="btn btn-link"
             onClick={() => addToLikedVideoHandler(item)}
           >
@@ -65,7 +69,7 @@ export const StackListContainer = ({ item }) => {
           </li>
         )}
         {historyVideos.includes(item) && (
-          <li
+          <li key={uuid()}
             className="btn btn-link"
             onClick={() => removeVideoFromHistoryHandler(item)}
           >

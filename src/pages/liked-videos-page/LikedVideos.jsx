@@ -31,6 +31,7 @@ export function LikedVideos() {
   return (
     <div className="grid-layout">
       <Aside />
+      {likedVideos.length === 0 ? <div className="center-text ft-grey ft-w-900">Please like some videos...</div> :
       <main className="liked-video-main">
         <h2 className="liked-video-title">Liked Videos</h2>
         <div className="video-container">
@@ -41,7 +42,7 @@ export function LikedVideos() {
             </li>
           ))}
         </div>
-      </main>
+      </main>}
     </div>
   );
 }

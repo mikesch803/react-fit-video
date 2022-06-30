@@ -6,7 +6,7 @@ const LikedVideoContext = createContext();
 
 const LikedVideoProvider = ({ children }) => {
   const [likedVideos, setLikedVideos] = useState([]);
-  const {setToastMsg, setToastStyles, setToastState} = useToast();
+  const {toastHandler} = useToast();
 
   const addToLikedVideoHandler = (video) => {
       
@@ -26,21 +26,11 @@ const LikedVideoProvider = ({ children }) => {
         );
         if (response.status === 201) {
           setLikedVideos(response.data.likes);
-          setToastStyles("alert alert-success")
-          setToastMsg("Added to liked videos")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("Added to Liked videos", "alert-danger")
         }
       } catch (err) {
         if (err.response.status === 500) {
-          setToastStyles("alert alert-warning")
-          setToastMsg("Login first")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("Login first","alert-warning");
         }
       }
     })();
@@ -58,12 +48,7 @@ const LikedVideoProvider = ({ children }) => {
         });
         if (response.status === 200) {
           setLikedVideos(response.data.likes);
-          setToastStyles("alert alert-danger")
-          setToastMsg("Removed from liked videos")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("Video Removed", "alert-danger")
         }
       } catch (err) {
         console.error(err);

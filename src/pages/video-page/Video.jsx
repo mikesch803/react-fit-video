@@ -1,7 +1,7 @@
 import React from "react";
 import "./Video.css";
 import { Aside, PlaylistModal, VideoCard } from "../../components";
-import { useLikedVideo, useVideo, useWatchLater } from "../../context";
+import { useLikedVideo, usePlaylist, useVideo, useWatchLater } from "../../context";
 import { PlaylistIcon, ThumbsUpIcon, WatchLaterIcon } from "../../icons/Icons";
 import {
   mustWatchVideos,
@@ -21,14 +21,15 @@ export function Video() {
     watchLaterVideos,
   } = useWatchLater();
   
-  const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
+  // const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
+  const {playlistModal, setPlaylistModal} = usePlaylist();
   
   useTitle("Video")
   return (
     <>
       <div
         className={
-          savePlaylistModal ? `video-grid-layout gray` : `video-grid-layout`
+          playlistModal ? `video-grid-layout gray` : `video-grid-layout`
         }
       >
         <Aside />
@@ -89,8 +90,8 @@ export function Video() {
               </button>
             )}
             <button
-              onClick={() => setSavePlaylistModal(true)}
-              className={savePlaylistModal ? " btn-fill" : ""}
+              onClick={() => setPlaylistModal(true)}
+              className={playlistModal ? " btn-fill" : ""}
             >
               <span>
                 <PlaylistIcon />
@@ -110,13 +111,13 @@ export function Video() {
           </div>
         </aside>
       </div>
-      {savePlaylistModal && (
-        <div className="modal-position">
-          <PlaylistModal
-            setSavePlaylistModal={setSavePlaylistModal}
+      {playlistModal && (
+        // <div className="modal-position" onClick={()=>setPlaylistModal(false)}>
+          <PlaylistModal 
+            setPlaylistModal={setPlaylistModal}
             video={state.currentVideo}
           />
-        </div>
+        // </div>
       )}
     </>
   );

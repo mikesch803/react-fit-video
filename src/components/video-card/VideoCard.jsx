@@ -25,7 +25,7 @@ export function VideoCard({
             videoClickHandler(item);
             navigate(`/video/${item._id}`);
             checkNotInHistroy(historyVideos, item) &&
-              addVideoToHistoryHandler(item);
+            addVideoToHistoryHandler(item);
           }}
         />
       </div>

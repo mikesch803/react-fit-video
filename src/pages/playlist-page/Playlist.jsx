@@ -15,31 +15,38 @@ export function Playlist() {
     removePlaylistHandler,
     addPlaylistHandler,
     removeVideoFromPlaylistHandler,
+    getAllPlaylist
   } = usePlaylist();
 
   const navigate = useNavigate();
   const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
-  useEffect(() => {
-    const encodedToken = localStorage.getItem("token");
-    (async () => {
-      try {
-        const response = await axios.get("/api/user/playlists", {
-          headers: {
-            authorization: encodedToken,
-          },
-        });
-        if (response.status === 200) {
-          playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, [playlistDispatch, removePlaylistHandler, removeVideoFromPlaylistHandler, state]);
+  // useEffect(() => {
+  //   const encodedToken = localStorage.getItem("token");
+  //   (async () => {
+  //     try {
+  //       const response = await axios.get("/api/user/playlists", {
+  //         headers: {
+  //           authorization: encodedToken,
+  //         },
+  //       });
+  //       if (response.status === 200) {
+  //         playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
+  //       }
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   })();
+  // }, [playlistDispatch, removePlaylistHandler, removeVideoFromPlaylistHandler, state]);
+
+  useEffect(()=>{
+    getAllPlaylist();
+    
+  },[playlistDispatch, removePlaylistHandler, removeVideoFromPlaylistHandler, state, getAllPlaylist])
 
   return (
     <div className="grid-layout">
       <Aside />
+      {state.allPlaylist.length === 0 ? <div className="center-text ft-grey ft-w-900">Please make some playlist...</div> : 
       <main className="playlist-main">
         <h2 className="playlist-title">
           All Playlists{" "}
@@ -80,7 +87,7 @@ export function Playlist() {
                 addPlaylistHandler(state.field);
                 setSavePlaylistModal(false);
               }}
-            >
+              >
               create
             </button>
           </div>
@@ -133,6 +140,7 @@ export function Playlist() {
         </ul>
       </main>
       
+    }
     </div>
   );
 }

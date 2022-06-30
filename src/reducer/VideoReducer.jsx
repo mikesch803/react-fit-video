@@ -5,7 +5,7 @@ export const videoReducer = (state, action) => {
 
     case "VIDEOS_BY_CATEGORY":
       return { ...state, categoryVideos: action.payload };
-
+      
     case "CURRENT_VIDEO":
       return { ...state, currentVideo: action.payload };
 

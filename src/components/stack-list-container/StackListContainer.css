@@ -2,7 +2,7 @@
   position: absolute;
   border: 0.5px solid;
   max-width: fit-content;
-  z-index: 5;
+  z-index: 1;
   bottom: -2.6rem;
   right: 0;
 }
