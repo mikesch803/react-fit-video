@@ -1,3 +1,82 @@
+/* .video-grid-layout {
+  display: grid;
+  grid-template-columns: 15.6rem 1fr 1fr 1fr;
+  grid-template-areas:
+    "header header header header"
+    "aside main main right-aside";
+  position: relative;
+}
+
+.video-main {
+  grid-area: main;
+  margin: 2rem 1rem;
+}
+
+.video-aside {
+  grid-area: right-aside;
+  margin-right: 1rem;
+}
+
+.video-title {
+  margin-bottom: 1rem;
+  word-break: break-all;
+}
+
+.video-frame {
+  height: 28rem;
+  width: 100%;
+}
+
+.video-btns {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.video-btns > button {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.video-btns > button > span {
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.gray {
+  background-color: rgba(200, 200, 200);
+}
+
+.btn-fill {
+  color: var(--COLOR-PRIMARY-DARK);
+}
+
+@media only screen and (max-width: 945px) {
+  .video-aside {
+    display: none;
+  }
+
+  .video-frame {
+    max-height: 28rem;
+    width: 100%;
+  }
+
+  .video-grid-layout {
+    grid-template-areas:
+      "header header header header"
+      "main main main main";
+  }
+} */
+
 .video-grid-layout {
   display: grid;
   grid-template-columns: 15.6rem 1fr 1fr 1fr;
@@ -50,6 +129,18 @@
   display: flex;
   align-items: center;
   font-size: 1.5rem;
+}
+
+.modal-position {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .gray {

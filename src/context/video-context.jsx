@@ -57,7 +57,8 @@ const VideoProvider = ({ children }) => {
     allVideos: [],
     categoryVideos: [],
     currentVideo: {},
-    searchVideos:null
+    search:null,
+    category: null
   });
 
   

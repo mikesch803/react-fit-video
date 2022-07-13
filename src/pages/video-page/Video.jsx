@@ -1,30 +1,36 @@
 import React from "react";
 import "./Video.css";
 import { Aside, PlaylistModal, VideoCard } from "../../components";
-import { useLikedVideo, usePlaylist, useVideo, useWatchLater } from "../../context";
+import {
+  useLikedVideo,
+  usePlaylist,
+  useVideo,
+  useWatchLater,
+} from "../../context";
 import { PlaylistIcon, ThumbsUpIcon, WatchLaterIcon } from "../../icons/Icons";
+import { useParams } from "react-router-dom";
 import {
   mustWatchVideos,
   checkLikedVideo,
   checkWatchLater,
 } from "../../utils/functions";
-import { usePlaylistModal, useTitle } from "../../hooks";
+import { useTitle, useVideoCardOption } from "../../hooks";
 export function Video() {
   const { state } = useVideo();
-  
+  const { src } = useParams();
   const { addToLikedVideoHandler, removeFromLikedVideoHandler, likedVideos } =
-  useLikedVideo();
-  
+    useLikedVideo();
+    const { videoCardOptionState, setVideoCardOptionState } =
+    useVideoCardOption();
   const {
     addVideoToWatchLaterHandler,
     removeVideoFromWatchLaterHandler,
     watchLaterVideos,
   } = useWatchLater();
-  
-  // const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
-  const {playlistModal, setPlaylistModal} = usePlaylist();
-  
-  useTitle("Video")
+
+  const { playlistModal, setPlaylistModal } = usePlaylist();
+
+  useTitle("Video");
   return (
     <>
       <div
@@ -34,19 +40,21 @@ export function Video() {
       >
         <Aside />
         <main className="video-main">
-          <h2 className="video-title">{state.currentVideo.title}</h2>
+          <h2 className="video-title">{state.currentVideo?.title}</h2>
           <iframe
             className="video-frame"
             frameBorder="0"
             allow="autoplay"
             title={state.currentVideo.title}
-            src={`https://www.youtube.com/embed/${state.currentVideo.src}?autoplay=1`}
+            src={`https://www.youtube.com/embed/${src}?autoplay=1`}
           />
           <div className="video-btns">
             {checkLikedVideo(state.currentVideo, likedVideos) ? (
               <button
                 className={
-                  checkLikedVideo(state.currentVideo, likedVideos) ? " btn-fill" : ""
+                  checkLikedVideo(state.currentVideo, likedVideos)
+                    ? " btn-fill"
+                    : ""
                 }
                 onClick={() => removeFromLikedVideoHandler(state.currentVideo)}
               >
@@ -68,7 +76,9 @@ export function Video() {
             {checkWatchLater(state.currentVideo, watchLaterVideos) ? (
               <button
                 className={
-                  checkWatchLater(state.currentVideo, watchLaterVideos) ? " btn-fill" : ""
+                  checkWatchLater(state.currentVideo, watchLaterVideos)
+                    ? " btn-fill"
+                    : ""
                 }
                 onClick={() =>
                   removeVideoFromWatchLaterHandler(state.currentVideo)
@@ -103,21 +113,20 @@ export function Video() {
         <aside className="video-aside">
           <h2 className="video-title">Must watch</h2>
           <div className="video-container">
-            {mustWatchVideos(state).map((item) => (
+            {mustWatchVideos(state.allVideos, src).map((item) => (
               <li key={item._id}>
-                <VideoCard item={item} />
+                <VideoCard item={item}     videoCardOptionState={videoCardOptionState}
+                setVideoCardOptionState={setVideoCardOptionState}/>
               </li>
             ))}
           </div>
         </aside>
       </div>
       {playlistModal && (
-        // <div className="modal-position" onClick={()=>setPlaylistModal(false)}>
-          <PlaylistModal 
-            setPlaylistModal={setPlaylistModal}
-            video={state.currentVideo}
-          />
-        // </div>
+        <PlaylistModal
+          setPlaylistModal={setPlaylistModal}
+          video={state.currentVideo}
+        />
       )}
     </>
   );

@@ -61,7 +61,7 @@ const HistoryProvider = ({ children }) => {
         });
         if (response.status === 200) {
           setHistoryVideos(response.data.history);
-          toastHandler("History cleared", "alert-sucess")
+          toastHandler("History cleared", "alert-success")
         }
       } catch (err) {
         console.error(err);

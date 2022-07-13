@@ -28,7 +28,7 @@ export const StackListContainer = ({ item }) => {
       <ul>
         {checkWatchLater(item, watchLaterVideos) ? (
           <li key={uuid()}
-            className="btn btn-link"
+            className="btn"
             onClick={() => removeVideoFromWatchLaterHandler(item)}
           >
             <span className="m-r-span">
@@ -38,7 +38,7 @@ export const StackListContainer = ({ item }) => {
           </li>
         ) : (
           <li key={uuid()}
-            className="btn btn-link"
+            className="btn"
             onClick={() => addVideoToWatchLaterHandler(item)}
           >
             <span className="m-r-span">
@@ -49,17 +49,17 @@ export const StackListContainer = ({ item }) => {
         )}
         {checkLikedVideo(item, likedVideos) ? (
           <li key={uuid()}
-            className="btn btn-link"
+            className="btn"
             onClick={() => removeFromLikedVideoHandler(item)}
           >
-            <span className="m-r-span">
+            <span className="m-r-span ">
               <ThumbsDownIcon />
             </span>
             dislike video
           </li>
         ) : ( 
           <li key={uuid()}
-            className="btn btn-link"
+            className="btn"
             onClick={() => addToLikedVideoHandler(item)}
           >
             <span className="m-r-span">
@@ -70,7 +70,7 @@ export const StackListContainer = ({ item }) => {
         )}
         {historyVideos.includes(item) && (
           <li key={uuid()}
-            className="btn btn-link"
+            className="btn"
             onClick={() => removeVideoFromHistoryHandler(item)}
           >
             <span className="m-r-span">&times;</span>Remove from history

@@ -23,7 +23,7 @@ function App() {
       <Toast/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path={`/video/:videoId`} element={<Video />} />
+        <Route path={`/video/:src`} element={<Video />} />
         <Route path={`/category:categoryId`} element={<Home />} />
         <Route path="*" element={<NotFound />} />
 

@@ -14,6 +14,11 @@ ul {
 .position-stack > ul > li {
   display: flex;
   align-items: center;
+  text-transform: capitalize;
+}
+
+.position-stack > ul span {
+  font-size: 1.5rem;
 }
 
 .m-r-span {

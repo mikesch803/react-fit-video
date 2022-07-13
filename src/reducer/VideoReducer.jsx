@@ -9,8 +9,11 @@ export const videoReducer = (state, action) => {
     case "CURRENT_VIDEO":
       return { ...state, currentVideo: action.payload };
 
+    case "SELECT_CATEGORY":
+      return {...state, category : action.payload}
+
     case "SEARCH_VIDEO":
-      return { ...state, searchVideos: action.payload };
+      return { ...state, search: action.payload };
 
     default:
       return state;

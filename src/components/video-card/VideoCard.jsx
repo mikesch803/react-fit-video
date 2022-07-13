@@ -23,7 +23,7 @@ export function VideoCard({
           alt={item.alt}
           onClick={() => {
             videoClickHandler(item);
-            navigate(`/video/${item._id}`);
+            navigate(`/video/${item.src}`);
             checkNotInHistroy(historyVideos, item) &&
             addVideoToHistoryHandler(item);
           }}
@@ -41,7 +41,7 @@ export function VideoCard({
           </p>
           <small>{item.creator}</small>
         </div>
-        <div
+        <div className="pointer"
           onClick={(e) => {
             e.stopPropagation();
             setVideoCardOptionState((prev) =>

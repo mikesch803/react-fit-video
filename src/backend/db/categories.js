@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 export const categories = [
   {
-    id:uuid(),
+    _id:uuid(),
     categoryName: "all"
   },
   {
