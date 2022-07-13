@@ -1,13 +1,12 @@
 import axios from "axios";
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useState } from "react";
 import { playlistReducer } from "../reducer/PlaylistReducer";
 import { useToast } from "./toast-context";
 
 const PlaylistContext = createContext();
 
 const PlaylistProvider = ({ children }) => {
-
-  const {setToastMsg, setToastState, setToastStyles} = useToast();
+  const { toastHandler } = useToast();
 
   const [state, playlistDispatch] = useReducer(playlistReducer, {
     allPlaylist: [],
@@ -17,10 +16,28 @@ const PlaylistProvider = ({ children }) => {
     currentPlaylist: {},
   });
 
-  const addPlaylistHandler = (playlist) => {
-    const encodedToken = localStorage.getItem("token");
-    (async () => {
+  const [playlistModal, setPlaylistModal] = useState(false);
+
+
+  const getAllPlaylist = async () => {
+      const encodedToken = localStorage.getItem("token");
       try {
+        const response = await axios.get("/api/user/playlists", {
+          headers: {
+            authorization: encodedToken,
+          },
+        });
+        if (response.status === 200) {
+          playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+  const addPlaylistHandler = async(playlist) => {
+      try {
+        const encodedToken = localStorage.getItem("token");
         const response = await axios.post(
           "/api/user/playlists",
           {
@@ -36,25 +53,22 @@ const PlaylistProvider = ({ children }) => {
           }
         );
         if (response.status === 201) {
-          playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
+          playlistDispatch({
+            type: "PLAYLISTS",
+            payload: response.data.playlists,
+          });
+          toastHandler("Playlist created", "alert-success")
         }
       } catch (err) {
         if (err.response.status === 500) {
-          setToastStyles("alert alert-warning")
-          setToastMsg("Login first")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("Login first", "alert-warning");
         }
       }
-    })();
   };
 
-  const removePlaylistHandler = (playlist) => {
-    const encodedToken = localStorage.getItem("token");
-    (async () => {
+  const removePlaylistHandler = async(playlist) => {
       try {
+        const encodedToken = localStorage.getItem("token");
         const response = await axios.delete(
           `/api/user/playlists/${playlist._id}`,
           {
@@ -64,13 +78,16 @@ const PlaylistProvider = ({ children }) => {
           }
         );
         if (response.status === 200) {
-          playlistDispatch({ type: "PLAYLISTS", payload: response.data.playlists });
+          playlistDispatch({
+            type: "PLAYLISTS",
+            payload: response.data.playlists,
+          });
           playlistDispatch({ type: "DELETE_PLAYLIST" });
+          toastHandler("Playlist removed", "alert-danger");
         }
       } catch (err) {
         console.error(err);
       }
-    })();
   };
 
   const addVideoToPlaylistHandler = (id, video) => {
@@ -90,25 +107,10 @@ const PlaylistProvider = ({ children }) => {
         );
         if (response.status === 201) {
           playlistDispatch({
-            type: "VIDEOS_IN_PLAYLIST",
-            payload: response.data.playlist.videos,
-          });
-
-          playlistDispatch({
-            type: "CURRENT_PLAYLIST",
-            payload: response.data.playlist,
-          });
-
-          playlistDispatch({
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
-          setToastStyles("alert alert-success")
-          setToastMsg("Playlist updated")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("Playlist updated", "alert-success");
         }
       } catch (err) {
         console.error(err);
@@ -129,10 +131,7 @@ const PlaylistProvider = ({ children }) => {
           }
         );
         if (response.status === 200) {
-          playlistDispatch({
-            type: "VIDEOS_IN_PLAYLIST",
-            payload: response.data.playlist.videos,
-          });
+
           playlistDispatch({
             type: "CURRENT_PLAYLIST",
             payload: response.data.playlist,
@@ -142,12 +141,7 @@ const PlaylistProvider = ({ children }) => {
             type: "UPDATE_PLAYLIST",
             payload: response.data.playlist,
           });
-          setToastStyles("alert alert-success")
-          setToastMsg("playlist updated")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("Removed video from playlist", "alert-danger");
         }
       } catch (err) {
         console.error(err);
@@ -190,6 +184,10 @@ const PlaylistProvider = ({ children }) => {
         addVideoToPlaylistHandler,
         removeVideoFromPlaylistHandler,
         getPlaylistHandler,
+        playlistModal,
+        setPlaylistModal,
+        getAllPlaylist,
+        
       }}
     >
       {children}

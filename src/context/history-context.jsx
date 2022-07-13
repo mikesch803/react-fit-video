@@ -1,12 +1,12 @@
 import axios from "axios";
 import { createContext, useState, useContext } from "react";
-import { useToast } from "./index";
+import { useToast } from "./toast-context";
 
 const HistoryContext = createContext();
 
 const HistoryProvider = ({ children }) => {
   const [historyVideos, setHistoryVideos] = useState([]);
-  const {setToastMsg, setToastState, setToastStyles} = useToast();
+  const {toastHandler} = useToast();
   const addVideoToHistoryHandler = (video) => {
     const encodedToken = localStorage.getItem("token");
     (async () => {
@@ -42,12 +42,7 @@ const HistoryProvider = ({ children }) => {
         });
         if (response.status === 200) {
           setHistoryVideos(response.data.history);
-          setToastStyles("alert alert-danger")
-          setToastMsg("Removed from history")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("Video removed","alert-danger");
         }
       } catch (err) {
         console.error(err);
@@ -66,12 +61,7 @@ const HistoryProvider = ({ children }) => {
         });
         if (response.status === 200) {
           setHistoryVideos(response.data.history);
-          setToastStyles("alert alert-success")
-          setToastMsg("History cleared")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler("History cleared", "alert-success")
         }
       } catch (err) {
         console.error(err);

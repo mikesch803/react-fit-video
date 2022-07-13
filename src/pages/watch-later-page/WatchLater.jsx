@@ -32,6 +32,7 @@ export function WatchLater() {
   return (
     <div className="grid-layout">
       <Aside />
+      {watchLaterVideos.length === 0 ? <div className="center-text ft-grey ft-w-900">Please some videos to watch later...</div> :
       <main className="watch-later-video-main">
         <h2 className="watch-later-video-title">Watch Later Videos</h2>
         <div className="video-container">
@@ -42,6 +43,7 @@ export function WatchLater() {
           ))}
         </div>
       </main>
+  }
     </div>
   );
 }

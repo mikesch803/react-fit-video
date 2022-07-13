@@ -1,12 +1,8 @@
 import { createContext, useReducer, useState, useContext } from "react";
 import axios from "axios";
 import { AuthReducer } from "../reducer/AuthReducer";
-import { useToast } from "./toast-context";
-import { useLikedVideo } from "./like-video-context";
-import { useHistory } from "./history-context";
-import { useWatchLater } from "./watch-later-context";
-import { usePlaylist } from "./playlist-context";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useHistory, useLikedVideo, usePlaylist, useToast, useWatchLater } from "./index";
 const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const { setHistoryVideos } = useHistory();
@@ -19,13 +15,10 @@ const AuthProvider = ({ children }) => {
     localStorage?.token ? true : false
   );
   const user = JSON.parse(localStorage.getItem("user"));
-  const { setToastMsg, setToastStyles, setToastState } = useToast();
+  const { toastHandler } = useToast();
   const [state, dispatch] = useReducer(AuthReducer, {
     field: {},
     passwordType: "password",
-    emailErrState: false,
-    passwordErrState: false,
-    confirmPasswordErrState: false,
   });
 
   const signupHandler = async (e) => {
@@ -45,12 +38,7 @@ const AuthProvider = ({ children }) => {
           );
           setUserState(true);
           navigate("/");
-          setToastStyles("alert alert-success");
-          setToastMsg("Sign up successfully");
-          setToastState(true);
-          setTimeout(() => {
-            setToastState(false);
-          }, 1500);
+          toastHandler("Sign in successfully ","alert-success");
         }
       } catch (error) {}
     }
@@ -68,21 +56,11 @@ const AuthProvider = ({ children }) => {
           localStorage.setItem("user", JSON.stringify(response.data.foundUser));
           setUserState(true);
           navigate(location?.state?.from?.pathname || "/");
-          setToastStyles("alert alert-success");
-          setToastMsg("Login successfully");
-          setToastState(true);
-          setTimeout(() => {
-            setToastState(false);
-          }, 1500);
+          toastHandler("Login successfully", "alert-success")
         }
       } catch (error) {
         if (error.response.status === 404) {
-          setToastState(true);
-          setToastMsg("Please sign up first");
-          setToastStyles("alert alert-warning");
-          setTimeout(() => {
-            setToastState(false);
-          }, 1500);
+          toastHandler("Please sign up first", "alert-warning");
         }
       }
     }
@@ -102,12 +80,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem("user", JSON.stringify(response.data.foundUser));
         setUserState(true);
         navigate(location?.state?.from?.pathname || '/');
-        setToastState(true);
-        setToastMsg("Login sucessfully");
-        setToastStyles("alert alert-success");
-        setTimeout(() => {
-          setToastState(false);
-        }, 1500);
+        toastHandler("Login successfully", "alert-success")
       }
     } catch (error) {
     }
@@ -121,12 +94,7 @@ const AuthProvider = ({ children }) => {
     playlistDispatch({ type: "DELETE_PLAYLIST" });
     setUserState(false);
     localStorage.clear();
-    setToastStyles("alert alert-success");
-    setToastMsg("Logout successfully");
-    setToastState(true);
-    setTimeout(() => {
-      setToastState(false);
-    }, 1500);
+    toastHandler("Logout successfully", "alert-success")
   };
 
   return (

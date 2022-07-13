@@ -3,22 +3,16 @@ import { useEffect } from "react";
 import { Aside, VideoCard } from "../../components";
 import { useVideo } from "../../context";
 import { useCategory, useTitle, useVideoCardOption } from "../../hooks";
+import { getFilterVideos } from "../../utils/functions/getFilterVideos";
 import "./Home.css";
 export function Home() {
   useTitle("Homes");
-  const {
-    categoryHandler,
-    setCateogoryVideos,
-    categoryVideos,
-    allVideosHandler,
-    activeBtn,
-  } = useCategory();
-
+  const { categoryHandler, setCateogoryVideos, activeBtn } = useCategory();
   const { state } = useVideo();
   useEffect(() => {
     setCateogoryVideos(state.allVideos);
   }, [state, setCateogoryVideos]);
-
+  const { dispatch } = useVideo();
   const { videoCardOptionState, setVideoCardOptionState } =
     useVideoCardOption();
 
@@ -27,17 +21,6 @@ export function Home() {
       <Aside />
       <div className="home-main">
         <div className="categories-btns">
-          <button
-            name="all"
-            className={`btn btn-outline btn-round ${
-              activeBtn === "all" ? "btn-active" : ""
-            }`}
-            onClick={(e) => {
-              allVideosHandler(e);
-            }}
-          >
-            All
-          </button>
           {state.categoryVideos.map((item) => (
             <button
               name={item.categoryName}
@@ -46,7 +29,11 @@ export function Home() {
                 activeBtn === item.categoryName ? "btn-active" : ""
               }`}
               onClick={(e) => {
-                categoryHandler(item, e);
+                categoryHandler(e);
+                dispatch({
+                  type: "SELECT_CATEGORY",
+                  payload: item.categoryName,
+                });
               }}
             >
               {item.categoryName}
@@ -54,7 +41,7 @@ export function Home() {
           ))}
         </div>
         <div className="video-container">
-          {categoryVideos.map((item) => (
+          {getFilterVideos(state).map((item) => (
             <li key={item._id}>
               <VideoCard
                 item={item}

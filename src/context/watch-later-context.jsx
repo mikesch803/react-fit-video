@@ -7,7 +7,7 @@ const WatchLaterContext = createContext();
 
 const WatchLaterProvider = ({ children }) => {
   const [watchLaterVideos, setWatchLaterVideos] = useState([]);
-  const { setToastMsg, setToastState, setToastStyles } = useToast();
+  const { toastHandler } = useToast();
   const addVideoToWatchLaterHandler = (video) => {
     const encodedToken = localStorage.getItem("token");
     (async () => {
@@ -25,21 +25,12 @@ const WatchLaterProvider = ({ children }) => {
         );
         if (response.status === 201) {
           setWatchLaterVideos(response.data.watchlater);
-          setToastStyles("alert alert-info");
-          setToastMsg("Added to watch later");
-          setToastState(true);
-          setTimeout(() => {
-            setToastState(false);
-          }, 1500);
+          toastHandler("Added to watch later", "alert-success");
+          
         }
       } catch (err) {
         if (err.response.status === 500) {
-          setToastStyles("alert alert-success")
-          setToastMsg("Login first")
-          setToastState(true);
-          setTimeout(()=>{
-            setToastState(false)
-          },1500)
+          toastHandler( "Login first","alert-warning")
         }
       }
     })();
@@ -59,12 +50,7 @@ const WatchLaterProvider = ({ children }) => {
         );
         if (response.status === 200) {
           setWatchLaterVideos(response.data.watchlater);
-          setToastStyles("alert alert-danger");
-          setToastMsg("Removed from watch later");
-          setToastState(true);
-          setTimeout(() => {
-            setToastState(false);
-          }, 1500);
+          toastHandler( "Removed from watch later","alert-danger")
         }
       } catch (err) {
         console.error(err);

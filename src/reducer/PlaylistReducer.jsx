@@ -2,7 +2,8 @@ export const playlistReducer = (state, action) => {
     switch (action.type) {
       case "INPUT_STATE":
         return { ...state, inputState: !state.inputState };
-      case "VIDEOS_IN_PLAYLIST":
+      
+      case "ADD_VIDEO_TO_PLAYLIST":
         return {
           ...state,
           videosInPlaylist: action.payload,

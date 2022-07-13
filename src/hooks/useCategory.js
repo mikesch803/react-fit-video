@@ -1,20 +1,9 @@
 import { useState } from "react";
-import { useVideo } from "../context";
 
 export function useCategory() {
-  const { state } = useVideo();
   const [categoryVideos, setCateogoryVideos] = useState([]);
   const [activeBtn, setActiveBtn] = useState("all");
-  const categoryHandler = (item, e) => {
-    let sortVideos = [...state.allVideos];
-    setCateogoryVideos(
-      sortVideos.filter((video) => video.categoryName === item.categoryName)
-    );
-    setActiveBtn(e.target.name);
-  };
-
-  const allVideosHandler = (e) => {
-    setCateogoryVideos(state.allVideos);
+  const categoryHandler = (e) => {
     setActiveBtn(e.target.name);
   };
 
@@ -22,7 +11,6 @@ export function useCategory() {
     categoryHandler,
     categoryVideos,
     setCateogoryVideos,
-    allVideosHandler,
     activeBtn,
   };
 }

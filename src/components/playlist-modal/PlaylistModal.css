@@ -4,6 +4,8 @@
   background-color: white;
   width: fit-content;
   border-radius: var(--BORDER-RADIUS);
+  padding: 1rem;
+  font-size: 1rem;
 }
 
 .video-modal-playlist > ul {
@@ -14,12 +16,14 @@
   display: flex;
   border-bottom: 0.5px solid;
   padding: 0.5rem;
+  align-items: center;
 }
 
 .video-modal-close {
   margin-left: auto;
   cursor: pointer;
   color: var(--COLOR-ERROR);
+  font-size: 1.5rem;
 }
 
 .p-half {
@@ -39,4 +43,23 @@
 
 .all-playlist {
   cursor: pointer;
+}
+
+.modal-position {
+  height: 100vh;
+  z-index: 2;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-input {
+  padding: 0.5rem;
+  outline: none;
 }

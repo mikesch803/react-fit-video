@@ -1,51 +1,60 @@
 import React from "react";
 import "./Video.css";
 import { Aside, PlaylistModal, VideoCard } from "../../components";
-import { useLikedVideo, useVideo, useWatchLater } from "../../context";
+import {
+  useLikedVideo,
+  usePlaylist,
+  useVideo,
+  useWatchLater,
+} from "../../context";
 import { PlaylistIcon, ThumbsUpIcon, WatchLaterIcon } from "../../icons/Icons";
+import { useParams } from "react-router-dom";
 import {
   mustWatchVideos,
   checkLikedVideo,
   checkWatchLater,
 } from "../../utils/functions";
-import { usePlaylistModal, useTitle } from "../../hooks";
+import { useTitle, useVideoCardOption } from "../../hooks";
 export function Video() {
   const { state } = useVideo();
-  
+  const { src } = useParams();
   const { addToLikedVideoHandler, removeFromLikedVideoHandler, likedVideos } =
-  useLikedVideo();
-  
+    useLikedVideo();
+    const { videoCardOptionState, setVideoCardOptionState } =
+    useVideoCardOption();
   const {
     addVideoToWatchLaterHandler,
     removeVideoFromWatchLaterHandler,
     watchLaterVideos,
   } = useWatchLater();
-  
-  const { savePlaylistModal, setSavePlaylistModal } = usePlaylistModal();
-  
-  useTitle("Video")
+
+  const { playlistModal, setPlaylistModal } = usePlaylist();
+
+  useTitle("Video");
   return (
     <>
       <div
         className={
-          savePlaylistModal ? `video-grid-layout gray` : `video-grid-layout`
+          playlistModal ? `video-grid-layout gray` : `video-grid-layout`
         }
       >
         <Aside />
         <main className="video-main">
-          <h2 className="video-title">{state.currentVideo.title}</h2>
+          <h2 className="video-title">{state.currentVideo?.title}</h2>
           <iframe
             className="video-frame"
             frameBorder="0"
             allow="autoplay"
             title={state.currentVideo.title}
-            src={`https://www.youtube.com/embed/${state.currentVideo.src}?autoplay=1`}
+            src={`https://www.youtube.com/embed/${src}?autoplay=1`}
           />
           <div className="video-btns">
             {checkLikedVideo(state.currentVideo, likedVideos) ? (
               <button
                 className={
-                  checkLikedVideo(state.currentVideo, likedVideos) ? " btn-fill" : ""
+                  checkLikedVideo(state.currentVideo, likedVideos)
+                    ? " btn-fill"
+                    : ""
                 }
                 onClick={() => removeFromLikedVideoHandler(state.currentVideo)}
               >
@@ -67,7 +76,9 @@ export function Video() {
             {checkWatchLater(state.currentVideo, watchLaterVideos) ? (
               <button
                 className={
-                  checkWatchLater(state.currentVideo, watchLaterVideos) ? " btn-fill" : ""
+                  checkWatchLater(state.currentVideo, watchLaterVideos)
+                    ? " btn-fill"
+                    : ""
                 }
                 onClick={() =>
                   removeVideoFromWatchLaterHandler(state.currentVideo)
@@ -89,8 +100,8 @@ export function Video() {
               </button>
             )}
             <button
-              onClick={() => setSavePlaylistModal(true)}
-              className={savePlaylistModal ? " btn-fill" : ""}
+              onClick={() => setPlaylistModal(true)}
+              className={playlistModal ? " btn-fill" : ""}
             >
               <span>
                 <PlaylistIcon />
@@ -102,21 +113,20 @@ export function Video() {
         <aside className="video-aside">
           <h2 className="video-title">Must watch</h2>
           <div className="video-container">
-            {mustWatchVideos(state).map((item) => (
+            {mustWatchVideos(state.allVideos, src).map((item) => (
               <li key={item._id}>
-                <VideoCard item={item} />
+                <VideoCard item={item}     videoCardOptionState={videoCardOptionState}
+                setVideoCardOptionState={setVideoCardOptionState}/>
               </li>
             ))}
           </div>
         </aside>
       </div>
-      {savePlaylistModal && (
-        <div className="modal-position">
-          <PlaylistModal
-            setSavePlaylistModal={setSavePlaylistModal}
-            video={state.currentVideo}
-          />
-        </div>
+      {playlistModal && (
+        <PlaylistModal
+          setPlaylistModal={setPlaylistModal}
+          video={state.currentVideo}
+        />
       )}
     </>
   );

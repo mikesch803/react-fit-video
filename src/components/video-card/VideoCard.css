@@ -32,6 +32,7 @@
 .card-img {
   padding: 0;
   object-fit: contain;
+  cursor: pointer;
 }
 
 .card-img-container {

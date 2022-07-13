@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useVideo } from "../../context";
 import { SearchIcon, UserIcon } from "../../icons/Icons";
+import { debounce } from "../../utils/functions";
 import "./Header.css";
 export function Header() {
+  const [searchText, setSearchText] = useState("");
   const { dispatch } = useVideo();
-  const searchVideoHandler = (e) => {
-    dispatch({ type: "SEARCH_VIDEO", payload: e.target.value })
+  const searchVideoHandler = () => {
+    dispatch({ type: "SEARCH_VIDEO", payload: searchText });
   };
+
+  const debounceFunc = debounce(searchVideoHandler, 1500);
+
+  useEffect(() => {
+    debounceFunc();
+  }, [searchText]);
 
   return (
     <div className="navbar">
@@ -18,7 +26,7 @@ export function Header() {
         <input
           className="navbar-input"
           placeholder="search videos..."
-          onChange={e => searchVideoHandler(e)}
+          onChange={(e) => setSearchText(e.target.value)}
         />
         <SearchIcon />
       </div>
